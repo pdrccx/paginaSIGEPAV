@@ -1526,8 +1526,21 @@
     font-size: 14px;
     align-items: center;
     gap: 10px;
+    border: 1px solid rgba(40, 200, 64, 0.25);
+    line-height: 1.4;
   }
   .form-success.show { display: flex; }
+  .form-success.error {
+    background: rgba(220, 38, 38, 0.08);
+    color: #991b1b;
+    border-color: rgba(220, 38, 38, 0.25);
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .form-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+  }
 
   /* ===========================
      FAQ
@@ -1683,7 +1696,10 @@
       padding: 20px;
       gap: 14px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(0, 43, 96, 0.08);
     }
+    /* Dentro del dropdown abierto los textos van en azul, independientemente del scroll */
+    .nav-links.open a:not(.btn) { color: var(--azul-800); }
     .mobile-toggle { display: block; }
     .hero-grid,
     .transparency-grid,
@@ -1707,12 +1723,25 @@
     .features-grid { grid-template-columns: 1fr; }
     .how-flow { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
-    .hero { padding: 120px 16px 60px; }
-    .hero-stats { gap: 24px; }
+    .hero { padding: 100px 16px 60px; }
+    .hero h1 { font-size: clamp(36px, 10vw, 48px); }
+    .hero-stats { gap: 18px 28px; }
+    .hero-stat { padding-left: 12px; }
+    .hero-stat .num { font-size: 24px; }
+    .hero-actions { flex-direction: column; gap: 12px; }
+    .hero-actions .btn { width: 100%; justify-content: center; }
     .contact-form { padding: 28px 20px; }
     .real-kpis { grid-template-columns: repeat(2, 1fr); }
     .real-navbar { gap: 8px; padding: 8px 10px; }
     .real-user { max-width: 110px; font-size: 9.5px; }
+    .real-kpi { padding: 8px; }
+    .real-kpi-num { font-size: 16px; }
+    .real-kpi-lbl { font-size: 9px; }
+    /* Form: que los inputs sean cómodos en móvil */
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea { font-size: 16px; } /* evita zoom iOS */
+    .form-submit { width: 100%; padding: 16px; font-size: 15px; }
   }
 
   /* Animaciones suaves al cargar (sin scroll observer, más confiable) */
@@ -2130,7 +2159,7 @@
         <div class="form-row">
           <div class="form-group">
             <label>Correo electrónico</label>
-            <input type="email" name="correo" required placeholder="tu@institucion.mx">
+            <input type="email" name="email" required placeholder="tu@institucion.mx">
           </div>
           <div class="form-group">
             <label>Teléfono</label>
@@ -2341,21 +2370,116 @@
 
   // (Las animaciones de entrada se manejan vía CSS, sin scroll observer)
 
-  // Formulario de contacto (placeholder — conecta con tu backend)
-  document.getElementById('contactForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Aquí conectas con tu API Express. Ejemplo:
-    // const formData = new FormData(e.target);
-    // fetch('/api/contacto', { method: 'POST', body: formData })
-    //   .then(r => r.json())
-    //   .then(d => { ... });
+  /* ────────────────────────────────────────────────────────────
+     FORMULARIO DE CONTACTO — Formspree (no necesita backend)
+     ──────────────────────────────────────────────────────────────
+     PARA ACTIVARLO:
+       1) Ve a https://formspree.io y créate cuenta con sigepav@gmail.com
+       2) Crea un nuevo form ("+ New form"), confírmalo desde el correo
+       3) Copia el endpoint que te dan (algo como https://formspree.io/f/abc123xyz)
+       4) Pégalo abajo reemplazando el FORMSPREE_ENDPOINT
+       5) Sube tu landing a GitHub Pages y ¡listo!
+     ──────────────────────────────────────────────────────────── */
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mgoqlllo';
+  const CORREO_FALLBACK    = 'sigepav@gmail.com';
 
-    // Por ahora solo muestra el mensaje de éxito
-    document.getElementById('formSuccess').classList.add('show');
-    e.target.reset();
-    setTimeout(() => {
-      document.getElementById('formSuccess').classList.remove('show');
-    }, 5000);
+  const contactForm = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+  const submitBtn   = contactForm.querySelector('.form-submit');
+  const submitOrig  = submitBtn.innerHTML;
+
+  function mostrarMensaje(tipo, texto) {
+    formSuccess.classList.remove('show', 'error');
+    formSuccess.innerHTML = tipo === 'ok'
+      ? `<span style="font-size:18px">✓</span><span>${texto}</span>`
+      : `<span style="font-size:18px">⚠</span><span>${texto}</span>`;
+    if (tipo === 'error') formSuccess.classList.add('error');
+    formSuccess.classList.add('show');
+    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  /* Fallback: abrir cliente de correo del usuario con todos los datos
+     ya pre-llenados, por si Formspree aún no está configurado o falla. */
+  function enviarPorMailto(datos) {
+    const cuerpo = [
+      `Nombre: ${datos.nombre}`,
+      `Institución: ${datos.institucion || '—'}`,
+      `Correo: ${datos.email}`,
+      `Teléfono: ${datos.telefono || '—'}`,
+      `¿Cómo nos conociste?: ${datos.referencia || '—'}`,
+      ``,
+      `Mensaje:`,
+      datos.mensaje || '(sin mensaje)'
+    ].join('\n');
+
+    const asunto = `Solicitud de demo SIGEPAV — ${datos.nombre}`;
+    const url = `mailto:${CORREO_FALLBACK}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+    window.location.href = url;
+  }
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Estado de carga
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span style="display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:8px"></span> Enviando...';
+    formSuccess.classList.remove('show', 'error');
+
+    const fd = new FormData(e.target);
+    const datos = {
+      nombre:      (fd.get('nombre')      || '').trim(),
+      institucion: (fd.get('institucion') || '').trim(),
+      email:       (fd.get('email')       || '').trim(),
+      telefono:    (fd.get('telefono')    || '').trim(),
+      referencia:  (fd.get('referencia')  || '').trim(),
+      mensaje:     (fd.get('mensaje')     || '').trim()
+    };
+
+    // Si Formspree NO está configurado aún, caemos directo al mailto
+    if (FORMSPREE_ENDPOINT.includes('TU_ID_AQUI')) {
+      enviarPorMailto(datos);
+      mostrarMensaje('ok', 'Se abrió tu cliente de correo para enviar la solicitud.');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = submitOrig;
+      return;
+    }
+
+    try {
+      // Formspree espera el campo "email" para el "Reply-To"
+      // y acepta "_subject" para personalizar el asunto del correo
+      const payload = new FormData();
+      payload.append('Nombre',       datos.nombre);
+      payload.append('Institución',  datos.institucion);
+      payload.append('email',        datos.email);
+      payload.append('Teléfono',     datos.telefono);
+      payload.append('Referencia',   datos.referencia);
+      payload.append('Mensaje',      datos.mensaje);
+      payload.append('_subject',     `📩 Solicitud de demo — ${datos.nombre}${datos.institucion ? ' (' + datos.institucion + ')' : ''}`);
+
+      const resp = await fetch(FORMSPREE_ENDPOINT, {
+        method:  'POST',
+        headers: { 'Accept': 'application/json' },
+        body:    payload
+      });
+
+      if (resp.ok) {
+        mostrarMensaje('ok', '¡Solicitud enviada! Te contactaremos en menos de 24 horas hábiles.');
+        e.target.reset();
+        setTimeout(() => formSuccess.classList.remove('show'), 8000);
+      } else {
+        const data = await resp.json().catch(() => ({}));
+        const err  = (data.errors && data.errors[0]?.message) || 'No fue posible enviar tu solicitud.';
+        mostrarMensaje('error', `${err} Te abrimos tu correo para que nos escribas directamente.`);
+        setTimeout(() => enviarPorMailto(datos), 1500);
+      }
+    } catch (err) {
+      // Error de red: hacemos fallback automático al mailto
+      mostrarMensaje('error', 'No hay conexión. Te abrimos tu cliente de correo como respaldo.');
+      setTimeout(() => enviarPorMailto(datos), 1500);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = submitOrig;
+    }
   });
 </script>
 
