@@ -273,18 +273,6 @@
     background-size: 60px 60px;
     pointer-events: none;
   }
-  .hero::after {
-    /* Suaviza la transición al siguiente section blanco */
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(180deg, transparent, var(--blanco));
-    pointer-events: none;
-    z-index: 1;
-  }
   .hero-grid {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
@@ -831,7 +819,7 @@
      =========================== */
   .transparency {
     padding: 100px 24px;
-    background: linear-gradient(135deg, var(--azul-900) 0%, var(--azul-800) 50%, var(--azul-700) 100%);
+    background: linear-gradient(180deg, #000d24 0%, #001530 50%, #001a3d 100%);
     color: white;
     position: relative;
     overflow: hidden;
@@ -1814,7 +1802,7 @@
         </div>
         <div class="hero-stat">
           <div class="num">IA</div>
-          <div class="label">Google Gemini</div>
+          <div class="label">Google AI Studio</div>
         </div>
       </div>
     </div>
@@ -1908,7 +1896,7 @@
         <div class="ai-row">
           <div class="ai-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 14h-1c0-3.87-3.13-7-7-7h-1V5.73c1.16-.41 2-1.52 2-2.82C15 1.32 13.68 0 12 0S9 1.32 9 3c0 1.3.84 2.41 2 2.82V7h-1c-3.87 0-7 3.13-7 7H2c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h1v1h18v-1h1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1zm-13 4H7v-4h2v4zm4 0h-2v-4h2v4zm4 0h-2v-4h2v4z"/></svg></div>
           <div class="ai-text">
-            <strong>IA con Gemini</strong>
+            <strong>IA con AI Studio</strong>
             <span>Recomendación inteligente</span>
           </div>
         </div>
@@ -2014,7 +2002,7 @@
       </div>
       <div class="feature">
         <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 14h-1c0-3.87-3.13-7-7-7h-1V5.73c1.16-.41 2-1.52 2-2.82C15 1.32 13.68 0 12 0S9 1.32 9 3c0 1.3.84 2.41 2 2.82V7h-1c-3.87 0-7 3.13-7 7H2c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h1v1h18v-1h1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1zm-13 4H7v-4h2v4zm4 0h-2v-4h2v4zm4 0h-2v-4h2v4z"/></svg></div>
-        <h4>IA con Gemini</h4>
+        <h4>IA con AI Studio</h4>
         <p>Recomendación inteligente del vehículo óptimo según número de personas y motivo, con fallback local por reglas si la API falla.</p>
       </div>
       <div class="feature">
@@ -2092,7 +2080,7 @@
           <li><span class="check">✓</span> Vehículos ilimitados — sin importar el tamaño de la flota</li>
           <li><span class="check">✓</span> Usuarios ilimitados (administradores y operativos)</li>
           <li><span class="check">✓</span> QR ciudadano público en cada unidad</li>
-          <li><span class="check">✓</span> IA con Gemini para recomendación de vehículo</li>
+          <li><span class="check">✓</span> IA con AI Studio para recomendación de vehículo</li>
           <li><span class="check">✓</span> Dashboard ejecutivo y reportes PDF ilimitados</li>
           <li><span class="check">✓</span> Expediente digital completo por vehículo</li>
           <li><span class="check">✓</span> Capacitación inicial incluida</li>
@@ -2284,7 +2272,7 @@
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            SIGEPAV integra <strong>Google Gemini</strong> para analizar el número de personas, motivo del viaje y disponibilidad de vehículos, y sugerir la opción más adecuada. Si la API de Gemini no responde, el sistema usa un recomendador local por reglas como respaldo, por lo que la operación nunca se bloquea. La decisión final siempre la toma el responsable.
+            SIGEPAV integra <strong>Google AI Studio</strong> para analizar el número de personas, motivo del viaje y disponibilidad de vehículos, y sugerir la opción más adecuada. Si la API de Google AI Studio no responde, el sistema usa un recomendador local por reglas como respaldo, por lo que la operación nunca se bloquea. La decisión final siempre la toma el responsable.
           </div>
         </div>
       </div>
@@ -2380,7 +2368,7 @@
        4) Pégalo abajo reemplazando el FORMSPREE_ENDPOINT
        5) Sube tu landing a GitHub Pages y ¡listo!
      ──────────────────────────────────────────────────────────── */
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mgoqlllo';
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/TU_ID_AQUI';
   const CORREO_FALLBACK    = 'sigepav@gmail.com';
 
   const contactForm = document.getElementById('contactForm');
