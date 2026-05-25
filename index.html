@@ -161,18 +161,19 @@
   /* ===========================
      NAVEGACIÓN
      =========================== */
-  nav {
+nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(0, 43, 96, 0.40);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(0, 43, 96, 0.08);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
     transition: var(--transition);
-  }
+}
   nav.scrolled {
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
@@ -200,7 +201,7 @@
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 20px;
-    color: white;
+    color: var(--azul-800);
     letter-spacing: 0.02em;
     transition: var(--transition);
   }
@@ -212,7 +213,7 @@
     align-items: center;
   }
   .nav-links a {
-    color: white;
+    color: var(--azul-800);
     text-decoration: none;
     font-weight: 500;
     font-size: 14.5px;
@@ -241,7 +242,7 @@
     display: none;
     background: none;
     border: none;
-    color: white;
+     color: var(--azul-800);
     font-size: 22px;
     cursor: pointer;
   }
@@ -2127,7 +2128,7 @@
             <div class="channel-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
             <div class="channel-info">
               <div class="label">Teléfono</div>
-              <div class="value"><a href="tel:+524920000000">+52 492 000 0000</a></div>
+              <div class="value"><a href="tel:+524931605986">+52 493 160 5986</a></div>
             </div>
           </div>
           <div class="channel">
@@ -2162,7 +2163,7 @@
           </div>
           <div class="form-group">
             <label>Teléfono</label>
-            <input type="tel" name="telefono" placeholder="+52 ...">
+            <input type="tel" name="Teléfono" placeholder="+52 493 160 5986">
           </div>
         </div>
         <div class="form-row">
