@@ -1908,15 +1908,16 @@
   counters.forEach(el => cio.observe(el));
 
   /* ==========================================================
-     2) MODO PANTALLA PUBLICITARIA (auto-scroll continuo)
+     2) MODO PANTALLA PUBLICITARIA
+        Auto-scroll continuo — NUNCA se pausa por interacción.
+        Si el usuario scrollea, el auto-scroll se reajusta y sigue.
      ========================================================== */
   (function signage() {
-    /* ---- AJUSTES RÁPIDOS (segundos) ---- */
-    const TOUR_SECONDS         = 140;   // duración del recorrido completo
-    const END_PAUSE_MS         = 4500;  // pausa al final antes de volver arriba
-    const INTERACTION_PAUSE_MS = 12000; // pausa tras interacción del usuario
-    const SPLASH_MS            = 4000;  // duración del splash inicial
-    /* ------------------------------------ */
+    /* ---- AJUSTES RÁPIDOS ---- */
+    const TOUR_SECONDS = 140;   // duración del recorrido completo
+    const END_PAUSE_MS = 4500;  // pausa al final antes de volver arriba
+    const SPLASH_MS    = 4000;  // duración del splash inicial
+    /* ------------------------- */
 
     const body      = document.body;
     const progress  = document.getElementById('progressBar');
@@ -1932,16 +1933,13 @@
     if (splash) splash.addEventListener('click', hideSplash);
     setTimeout(hideSplash, SPLASH_MS);
 
-    /* ---- Auto-scroll cinemático ---- */
+    /* ---- Auto-scroll continuo ---- */
     let scrolling = true;
-    let paused    = false;
     let endBusy   = false;
     let pos       = window.scrollY;
     let lastT     = 0;
-    let resumeTimer = null;
 
     const maxScroll = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-    const sync = () => { pos = window.scrollY; };
 
     function setProgress() {
       if (!progress) return;
@@ -1954,8 +1952,15 @@
       const dt = Math.min(64, t - lastT);
       lastT = t;
 
-      if (scrolling && !paused && !endBusy) {
+      if (scrolling && !endBusy) {
         const m = maxScroll();
+
+        // Si el usuario movió la página manualmente, reajustamos sin pelear
+        const actual = window.scrollY;
+        if (Math.abs(actual - pos) > 4) {
+          pos = actual;
+        }
+
         if (pos >= m - 1) {
           endBusy = true;
           pos = m;
@@ -1965,7 +1970,6 @@
             setTimeout(() => {
               pos = 0;
               endBusy = false;
-              sync();
             }, 1400);
           }, END_PAUSE_MS);
         } else {
@@ -1979,36 +1983,22 @@
     }
     requestAnimationFrame(loop);
 
-    function pauseTemporarily(ms) {
-      paused = true;
-      clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => {
-        paused = false;
-        sync();
-      }, ms);
-    }
-
-    // Interacción del usuario: pausa temporal y luego continúa
-    ['wheel', 'touchmove', 'touchstart'].forEach(ev => {
-      window.addEventListener(ev, () => {
-        sync();
-        pauseTemporarily(INTERACTION_PAUSE_MS);
-      }, { passive: true });
+    // Si alguien usa un link ancla del menú, re-sincronizamos la posición
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', () => {
+        setTimeout(() => { pos = window.scrollY; }, 500);
+      });
     });
-    window.addEventListener('scroll', () => {
-      if (paused) sync();
-      setProgress();
-    }, { passive: true });
 
     /* ---- Botones de reproducción ---- */
     if (pbToggle) {
       pbToggle.addEventListener('click', () => {
         scrolling = !scrolling;
         lastT = 0;
+        if (scrolling) pos = window.scrollY;
         pbToggle.innerHTML = scrolling
           ? '<i class="fa-solid fa-pause"></i>'
           : '<i class="fa-solid fa-play"></i>';
-        if (scrolling) sync();
       });
     }
     if (pbFull) {
@@ -2040,7 +2030,7 @@
     window.addEventListener('resize', () => {
       checkSignage();
       lastT = 0;
-      sync();
+      pos = window.scrollY;
       setProgress();
     });
     window.addEventListener('load', () => { setProgress(); });
