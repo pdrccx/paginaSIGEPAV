@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="SIGEPAV — Sistema de Gestión del Parque Vehicular. Transparencia proactiva para flotillas institucionales del TecNM y dependencias gubernamentales.">
 <title>SIGEPAV · Sistema de Gestión del Parque Vehicular</title>
+<link rel="icon" type="image/png" href="logo-sigepav-actualizado.png">
 
 <!-- Tipografías de Google -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1361,6 +1362,7 @@ nav {
   /* ===========================
      RESPONSIVE
      =========================== */
+  @media (min-width: 969px) { #personas .features-grid, #evolucion .features-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 968px) {
     .nav-links { display: none; }
     .nav-links.open {
@@ -1437,14 +1439,14 @@ nav {
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <img src="logo-sigepav.png" alt="SIGEPAV">
+      <img src="logo-sigepav-actualizado.png" alt="SIGEPAV">
       <span class="nav-brand">SIGEPAV</span>
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#transparencia">Transparencia</a></li>
       <li><a href="#caracteristicas">Características</a></li>
       <li><a href="#como-funciona">¿Cómo funciona?</a></li>
-      <li><a href="#precios">Precios</a></li>
+      <li><a href="#precios">Implementación</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contacto" class="btn btn-gold">Solicitar demo</a></li>
     </ul>
@@ -1458,7 +1460,7 @@ nav {
     <div class="hero-text-col">
       <div class="hero-eyebrow">
         <span class="pulse"></span>
-        Disponible para TecNM · Edición 2026
+        INNOVATEC 2026 · Etapa regional
       </div>
       <h1>
         Tu flotilla<br>
@@ -1466,7 +1468,7 @@ nav {
         <span class="gold">transparente.</span>
       </h1>
       <p class="hero-text">
-        SIGEPAV es la primera plataforma con <strong>transparencia proactiva</strong> para gestionar vehículos institucionales. Comisiones, combustible, mantenimientos y reportes ciudadanos vía QR — en una sola aplicación.
+        SIGEPAV conecta la <strong>gestión de la flotilla con la rendición de cuentas</strong>. Del registro de una comisión al reporte ciudadano por QR: vehículos, combustible, mantenimiento y seguimiento en una sola aplicación web.
       </p>
       <div class="hero-actions">
         <a href="#contacto" class="btn btn-primary">
@@ -1478,21 +1480,21 @@ nav {
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <div class="num">50+</div>
-          <div class="label">Endpoints API</div>
+          <div class="num">3</div>
+          <div class="label">Perfiles de uso</div>
         </div>
         <div class="hero-stat">
-          <div class="num">24/7</div>
-          <div class="label">Disponibilidad</div>
+          <div class="num">QR</div>
+          <div class="label">Acceso ciudadano</div>
         </div>
         <div class="hero-stat">
           <div class="num">IA</div>
-          <div class="label">Google AI Studio</div>
+          <div class="label">Análisis de flota</div>
         </div>
       </div>
     </div>
 
-    <!-- MOCKUP DEL DASHBOARD (estilo real de la app) -->
+    <!-- Vista ilustrativa; las cifras no representan resultados medidos -->
     <div class="hero-visual">
       <div class="mockup mockup-real">
         <!-- Barra azul superior (estilo real con Módulos + logo + correo) -->
@@ -1503,7 +1505,7 @@ nav {
           </div>
           <div class="real-brand">
             <div class="real-brand-logo">
-              <img src="logo-sigepav.png" alt="" onerror="this.style.display='none'">
+              <img src="logo-sigepav-actualizado.png" alt="" onerror="this.style.display='none'">
             </div>
             <span>SIGEPAV</span>
           </div>
@@ -1581,7 +1583,7 @@ nav {
         <div class="ai-row">
           <div class="ai-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 14h-1c0-3.87-3.13-7-7-7h-1V5.73c1.16-.41 2-1.52 2-2.82C15 1.32 13.68 0 12 0S9 1.32 9 3c0 1.3.84 2.41 2 2.82V7h-1c-3.87 0-7 3.13-7 7H2c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h1v1h18v-1h1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1zm-13 4H7v-4h2v4zm4 0h-2v-4h2v4zm4 0h-2v-4h2v4z"/></svg></div>
           <div class="ai-text">
-            <strong>IA con Google AI Studio</strong>
+            <strong>Análisis inteligente</strong>
             <span>Recomendación inteligente</span>
           </div>
         </div>
@@ -1590,13 +1592,14 @@ nav {
   </div>
 </section>
 
+<p class="container" style="padding:18px 24px;color:#526176;font-size:13px">Vista ilustrativa del panel: las cifras de esta página son ejemplos, no resultados medidos de una institución.</p>
 <!-- ============== TRANSPARENCIA PROACTIVA ============== -->
 <section class="transparency" id="transparencia">
   <div class="container">
     <div class="section-tag">Innovación principal</div>
     <h2 class="section-title">Transparencia <span class="accent">proactiva</span> de verdad.</h2>
     <p class="section-lead">
-      Mientras otros sistemas publican información solo cuando la solicitan, SIGEPAV expone los datos del parque vehicular <strong style="color: white;">antes de que se pidan</strong>. Cada vehículo lleva un código QR público — escanéalo y verás todo.
+      Cada vehículo puede conectar a la institución con la ciudadanía. El QR abre un portal para <strong style="color: white;">consultar información pública, reportar incidentes y darles seguimiento</strong>, sin crear una cuenta.
     </p>
 
     <div class="transparency-grid">
@@ -1612,21 +1615,21 @@ nav {
           <div class="step-number">2</div>
           <div class="step-content">
             <h4>El ciudadano escanea</h4>
-            <p>Cualquier persona con un teléfono puede escanear el QR y acceder al expediente público del vehículo. Sin login, sin trámites.</p>
+            <p>Cualquier persona con internet o datos móviles puede abrir el portal público de la unidad desde su teléfono, sin cuenta ni contraseña.</p>
           </div>
         </div>
         <div class="transp-step">
           <div class="step-number">3</div>
           <div class="step-content">
-            <h4>Información en tiempo real</h4>
-            <p>Verá las comisiones recientes, consumo de combustible, mantenimientos y estatus actual del vehículo institucional.</p>
+            <h4>Reportes con seguimiento</h4>
+            <p>Puede consultar las comisiones publicadas y enviar un incidente con evidencia. Recibe un enlace para consultar el estado de su reporte.</p>
           </div>
         </div>
         <div class="transp-step">
           <div class="step-number">4</div>
           <div class="step-content">
-            <h4>Cumplimiento normativo</h4>
-            <p>Alineado con la Ley General de Transparencia, Protección de Datos y los lineamientos de austeridad de la SFP.</p>
+            <h4>Atención institucional</h4>
+            <p>El administrador revisa el reporte y actualiza su estado. La institución define qué información corresponde publicar y cómo atender cada caso.</p>
           </div>
         </div>
       </div>
@@ -1638,11 +1641,37 @@ nav {
         <h3>Escanea, consulta, listo.</h3>
         <p>Cualquier ciudadano puede verificar el uso de un vehículo público en segundos. Esa es la diferencia.</p>
         <div class="qr-badge">
-          🛡️ 100% Público
+          Consulta sin cuenta
         </div>
       </div>
     </div>
   </div>
+</section>
+
+
+<section id="personas" class="features">
+ <div class="container">
+  <div class="section-tag">Tres perfiles, un mismo sistema</div>
+  <h2 class="section-title">De la oficina al campo, <span class="accent">con seguimiento</span>.</h2>
+  <p class="section-lead">Cada comisión conecta la planeación, la captura operativa y la revisión administrativa. El portal ciudadano abre un canal adicional de participación.</p>
+  <div class="features-grid">
+   <article class="feature"><div class="feature-icon">01</div><h4>Administrador</h4><p>Asigna comisiones, administra unidades y vales, revisa solicitudes de finalización y consulta reportes.</p></article>
+   <article class="feature"><div class="feature-icon">02</div><h4>Comisionado</h4><p>Consulta su comisión desde el teléfono, registra kilometraje y combustible y envía el cierre para aprobación.</p></article>
+   <article class="feature"><div class="feature-icon">03</div><h4>Ciudadano</h4><p>Escanea el QR con internet o datos móviles, reporta un incidente con evidencia y consulta su seguimiento sin iniciar sesión.</p></article>
+  </div>
+ </div>
+</section>
+<section id="evolucion" class="features">
+ <div class="container">
+  <div class="section-tag">SIGEPAV en la etapa regional</div>
+  <h2 class="section-title">Más información para <span class="accent">decidir y rendir cuentas</span>.</h2>
+  <div class="features-grid">
+   <article class="feature"><div class="feature-icon">$</div><h4>Costos por vehículo</h4><p>Consulta los importes registrados y compara el comportamiento de las unidades para apoyar la revisión del gasto.</p></article>
+   <article class="feature"><div class="feature-icon">!</div><h4>Vencimientos y salud de flota</h4><p>Identifica documentos por vencer, servicios programados y señales registradas que requieren atención.</p></article>
+   <article class="feature"><div class="feature-icon">↗</div><h4>Historial y respaldos</h4><p>Relaciona comisiones, documentos y registros por vehículo. Exporta reportes y genera respaldos de la base de datos.</p></article>
+  </div>
+  <p class="section-lead" style="margin-top:32px">La captura sin señal y la sincronización posterior son una mejora prevista. En la versión actual, el operativo necesita conexión al servidor para enviar el cierre.</p>
+ </div>
 </section>
 
 <!-- ============== CARACTERÍSTICAS / MÓDULOS ============== -->
@@ -1678,17 +1707,17 @@ nav {
       <div class="feature">
         <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div>
         <h4>Mantenimiento</h4>
-        <p>Programación preventiva y correctiva con observaciones, fechas y bitácora completa.</p>
+        <p>Servicios programados, observaciones por unidad e historial para dar seguimiento a las necesidades de mantenimiento.</p>
       </div>
       <div class="feature">
         <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg></div>
         <h4>Dashboard ejecutivo</h4>
-        <p>KPIs en tiempo real, gráficas operativas y exportación a PDF con un clic.</p>
+        <p>Indicadores y gráficas a partir de los registros operativos, con reportes y exportaciones para revisión administrativa.</p>
       </div>
       <div class="feature">
         <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 14h-1c0-3.87-3.13-7-7-7h-1V5.73c1.16-.41 2-1.52 2-2.82C15 1.32 13.68 0 12 0S9 1.32 9 3c0 1.3.84 2.41 2 2.82V7h-1c-3.87 0-7 3.13-7 7H2c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h1v1h18v-1h1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1zm-13 4H7v-4h2v4zm4 0h-2v-4h2v4zm4 0h-2v-4h2v4z"/></svg></div>
-        <h4>IA con Google AI Studio</h4>
-        <p>Recomendación inteligente del vehículo óptimo según número de personas y motivo, con fallback local por reglas si la API falla.</p>
+        <h4>Análisis inteligente</h4>
+        <p>Selección de vehículos y priorización de mantenimiento con reglas sobre los datos registrados. Gemini puede complementar la redacción cuando está configurado.</p>
       </div>
       <div class="feature">
         <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></div>
@@ -1703,9 +1732,9 @@ nav {
 <section class="how" id="como-funciona">
   <div class="container">
     <div class="section-tag">Proceso simplificado</div>
-    <h2 class="section-title">Cuatro pasos, <span class="accent">cero fricción</span>.</h2>
+    <h2 class="section-title">De la instalación a la <span class="accent">operación diaria</span>.</h2>
     <p class="section-lead">
-      Desde la contratación hasta la operación diaria, SIGEPAV se adapta a tu institución. Implementación en menos de una semana.
+      La implementación se coordina con tu institución: infraestructura, carga inicial y capacitación antes de iniciar la operación.
     </p>
 
     <div class="how-flow">
@@ -1714,8 +1743,8 @@ nav {
           01
           <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11l-2 2 2 2 2-2-2-2zm-4-4l-2 2 2 2 2-2-2-2zm-3 5l-2 2 2 2 2-2-2-2zm6.6 1.4l2.6-2.6L21 6.8 14.2 0l-4 4-1.4-1.4L7.4 4 6 2.6 4.6 4 6 5.4 4.6 6.8 6 8.2 4.6 9.6 6 11l1.4-1.4L8.8 11l1.4-1.4 4.4 4.4-1.4 1.4 7 6.8 1.4-1.4-7-6.8z"/></svg></span>
         </div>
-        <h4>Contrata</h4>
-        <p>Suscripción mensual con soporte, actualizaciones y capacitación incluidos.</p>
+        <h4>Define la instalación</h4>
+        <p>Revisa el tamaño de la flotilla, el alcance de la licencia y la infraestructura disponible con el área de sistemas.</p>
       </div>
       <div class="how-step">
         <div class="num-circle">
@@ -1731,7 +1760,7 @@ nav {
           <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg></span>
         </div>
         <h4>Capacita</h4>
-        <p>Capacitación remota a tu equipo administrativo y a los usuarios operativos.</p>
+        <p>Prepara al administrador y al personal operativo para registrar comisiones, capturar datos y revisar solicitudes de cierre.</p>
       </div>
       <div class="how-step">
         <div class="num-circle">
@@ -1739,7 +1768,7 @@ nav {
           <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9.19 6.35c-2.04 2.29-3.44 5.58-3.57 5.89L2 10.69l4.05-4.05c.47-.47 1.15-.68 1.81-.55l1.33.26zM11.17 17s3.74-1.55 5.89-3.7c5.4-5.4 4.5-9.62 4.21-10.57-.95-.3-5.17-1.19-10.57 4.21C8.55 9.09 7 12.83 7 12.83L11.17 17zm6.48-2.19c-2.29 2.04-5.58 3.44-5.89 3.57L13.31 22l4.05-4.05c.47-.47.68-1.15.55-1.81l-.26-1.33zM9 18c0 .83-.34 1.58-.88 2.12C6.94 21.3 2 22 2 22s.7-4.94 1.88-6.12C4.42 15.34 5.17 15 6 15c1.66 0 3 1.34 3 3zm6-9c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"/></svg></span>
         </div>
         <h4>Opera</h4>
-        <p>Empieza a registrar comisiones, monitorear KPIs y publicar transparencia proactiva.</p>
+        <p>Opera desde el navegador y habilita el portal ciudadano mediante una dirección pública HTTPS estable.</p>
       </div>
     </div>
   </div>
@@ -1747,34 +1776,25 @@ nav {
 
 <!-- ============== PRECIOS ============== -->
 <section class="pricing" id="precios">
-  <div class="container">
-    <div class="section-tag">Precio simple</div>
-    <h2 class="section-title">Un precio <span class="accent">honesto</span>, todo incluido.</h2>
-    <p class="section-lead">
-      Sin costos ocultos, sin cobros por usuario adicional, sin sorpresas y sin importar el tamaño de tu flota.
-    </p>
-
-    <div class="pricing-grid pricing-single">
-      <div class="plan featured">
-        <div class="plan-badge">Tarifa única</div>
-        <div class="plan-name">SIGEPAV Completo</div>
-        <div class="plan-desc">Todo el sistema, todos los módulos, sin restricciones.</div>
-        <div class="plan-price">$1,000<small> MXN</small></div>
-        <div class="plan-billing">Por mes · IVA incluido</div>
-        <ul class="plan-list">
-          <li><span class="check">✓</span> Vehículos ilimitados — sin importar el tamaño de la flota</li>
-          <li><span class="check">✓</span> Usuarios ilimitados (administradores y operativos)</li>
-          <li><span class="check">✓</span> QR ciudadano público en cada unidad</li>
-          <li><span class="check">✓</span> IA con Google AI Studio para recomendación de vehículo</li>
-          <li><span class="check">✓</span> Dashboard ejecutivo y reportes PDF ilimitados</li>
-          <li><span class="check">✓</span> Expediente digital completo por vehículo</li>
-          <li><span class="check">✓</span> Capacitación inicial incluida</li>
-          <li><span class="check">✓</span> Soporte por correo</li>
-        </ul>
-        <a href="#contacto" class="btn btn-gold">Contratar ahora</a>
-      </div>
-    </div>
-  </div>
+ <div class="container">
+  <div class="section-tag">Implementación por institución</div>
+  <h2 class="section-title">Una propuesta para <span class="accent">tu flotilla</span>.</h2>
+  <p class="section-lead">El alcance se define según las unidades, la instalación y el acompañamiento requerido. Solicita una propuesta para tu plantel o institución.</p>
+  <div class="pricing-grid pricing-single"><div class="plan featured">
+   <div class="plan-badge">Licenciamiento por flota</div>
+   <div class="plan-name">SIGEPAV institucional</div>
+   <div class="plan-desc">Gestión operativa, reportes y participación ciudadana.</div>
+   <div class="plan-price" style="font-size:clamp(24px,4vw,36px)">Solicitar cotización</div>
+   <div class="plan-billing">Alcance y condiciones por confirmar en la propuesta</div>
+   <ul class="plan-list">
+    <li><span class="check">✓</span> Vehículos, comisiones y vales de combustible</li>
+    <li><span class="check">✓</span> Expedientes, mantenimiento y vencimientos</li>
+    <li><span class="check">✓</span> Costos, bitácora y exportación de reportes</li>
+    <li><span class="check">✓</span> Portal ciudadano por QR y seguimiento</li>
+    <li><span class="check">✓</span> Instalación coordinada con sistemas de la institución</li>
+   </ul><a href="#contacto" class="btn btn-gold">Consultar implementación</a>
+  </div></div>
+ </div>
 </section>
 
 
@@ -1815,9 +1835,10 @@ nav {
       </div>
 
       <form class="contact-form" id="contactForm">
+<p style="font-size:13px;color:var(--gris-texto);margin-bottom:20px">Al enviar, tus datos de contacto se remiten al equipo mediante Formspree para atender tu solicitud. No incluyas información sensible.</p>
         <div class="form-success" id="formSuccess">
           ✓
-          <span>¡Mensaje enviado! Te contactaremos en menos de 24 horas.</span>
+          <span>¡Solicitud enviada! Revisaremos tu mensaje para coordinar la demostración.</span>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -1885,8 +1906,8 @@ nav {
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            No. SIGEPAV es una plataforma web 100% en la nube. Tus usuarios solo necesitan un navegador moderno (Chrome, Edge, Firefox o Safari) y conexión a internet. Funciona en computadoras, tabletas y celulares.
-          </div>
+SIGEPAV se instala en un servidor con la aplicación y su base de datos. Administradores y operativos acceden desde el navegador. Para entrar fuera del campus y usar los QR ciudadanos, sistemas debe habilitar una dirección pública HTTPS. La disponibilidad depende del servidor y su conectividad.
+</div>
         </div>
       </div>
 
@@ -1897,8 +1918,8 @@ nav {
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            Hacemos la migración inicial sin costo. Solo envíanos tu base actual (Excel, CSV o lo que tengas) y nosotros la importamos al sistema durante la fase de configuración.
-          </div>
+La información existente debe revisarse antes de cargarla: formato, campos y calidad de los datos. La migración se acuerda durante la implementación; no se ofrece como una importación automática de cualquier archivo.
+</div>
         </div>
       </div>
 
@@ -1909,8 +1930,8 @@ nav {
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            No. El expediente público solo muestra información de interés ciudadano: comisiones recientes, destinos, motivos generales y consumo. Datos personales del personal, números de cuenta o información sensible NUNCA se exponen. Cumplimos con la Ley General de Protección de Datos Personales.
-          </div>
+El QR abre el portal ciudadano, no el expediente administrativo. Permite consultar la información pública disponible y reportar incidentes. La institución debe revisar el contenido publicado y las políticas de tratamiento de datos antes de operar con información real.
+</div>
         </div>
       </div>
 
@@ -1921,8 +1942,8 @@ nav {
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            SIGEPAV maneja tres niveles. El <strong>administrador maestro</strong> (entregado por SIGEPAV al contratar) puede crear usuarios y configurar todo el sistema. Los <strong>administradores</strong> gestionan vehículos, comisiones, vales y reportes. Los <strong>usuarios normales</strong> consultan su información operativa. Toda acción queda registrada en la bitácora. El ciudadano accede sin login a la vista pública del QR.
-          </div>
+El <strong>administrador</strong> gestiona vehículos, usuarios, comisiones y solicitudes de cierre. El <strong>operativo</strong> captura información de sus comisiones desde el teléfono y solicita finalizarlas. El <strong>ciudadano</strong> consulta y reporta por QR, sin cuenta.
+</div>
         </div>
       </div>
 
@@ -1933,8 +1954,8 @@ nav {
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            Por lo general entre 3 y 7 días hábiles, incluyendo capacitación inicial. Para flotillas grandes con migración de datos extensa, el tiempo puede variar dependiendo del volumen, pero te damos un cronograma exacto al inicio del proyecto.
-          </div>
+El calendario depende de la preparación del servidor, la base de datos, el acceso HTTPS y la carga inicial. Se acuerda una prueba piloto y una revisión del flujo completo antes de ampliar la operación.
+</div>
         </div>
       </div>
 
@@ -1945,8 +1966,8 @@ nav {
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            Por supuesto. Tus datos son tuyos. Puedes exportar todo el histórico en Excel, CSV o PDF en cualquier momento desde el dashboard. Sin candados, sin "rehenes".
-          </div>
+Los módulos de reportes permiten exportar información a PDF y Excel, y el sistema cuenta con respaldos SQL. La conservación del expediente completo también requiere respaldar los documentos y evidencias almacenados en el servidor.
+</div>
         </div>
       </div>
 
@@ -1957,8 +1978,8 @@ nav {
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            SIGEPAV integra <strong>Google AI Studio</strong> para analizar el número de personas, motivo del viaje y disponibilidad de vehículos, y sugerir la opción más adecuada. Si la API de Google AI Studio no responde, el sistema usa un recomendador local por reglas como respaldo, por lo que la operación nunca se bloquea. La decisión final siempre la toma el responsable.
-          </div>
+El motor local usa reglas y datos registrados para recomendar unidades y priorizar revisiones. Gemini es un complemento opcional de redacción. El análisis orienta al responsable y no sustituye una inspección mecánica ni garantiza la predicción de fallas.
+</div>
         </div>
       </div>
     </div>
@@ -1970,11 +1991,11 @@ nav {
   <div class="footer-grid">
     <div class="footer-col">
       <div class="footer-brand">
-        <img src="logo-sigepav.png" alt="SIGEPAV">
+        <img src="logo-sigepav-actualizado.png" alt="SIGEPAV">
         <span class="name">SIGEPAV</span>
       </div>
       <p class="footer-about">
-        Sistema de Gestión del Parque Vehicular. La primera plataforma con transparencia proactiva para flotillas institucionales en México.
+        Sistema de Gestión del Parque Vehicular. Gestión, rendición de cuentas y participación ciudadana para flotillas institucionales.
       </p>
     </div>
     <div class="footer-col">
@@ -1982,7 +2003,7 @@ nav {
       <ul>
         <li><a href="#caracteristicas">Características</a></li>
         <li><a href="#como-funciona">Cómo funciona</a></li>
-        <li><a href="#precios">Precios</a></li>
+        <li><a href="#precios">Implementación</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1997,9 +2018,9 @@ nav {
     <div class="footer-col">
       <h5>Legal</h5>
       <ul>
-        <li><a href="#">Aviso de privacidad</a></li>
-        <li><a href="#">Términos de uso</a></li>
-        <li><a href="#">Política de cookies</a></li>
+        <li>Aviso de privacidad: consultar al equipo</li>
+        <li>Condiciones de uso: consultar al equipo</li>
+        <li>Contacto mediante Formspree</li>
       </ul>
     </div>
   </div>
@@ -2127,7 +2148,7 @@ nav {
       });
 
       if (resp.ok) {
-        mostrarMensaje('ok', '¡Solicitud enviada! Te contactaremos en menos de 24 horas hábiles.');
+        mostrarMensaje('ok', '¡Solicitud enviada! Revisaremos tu mensaje para coordinar la demostración.');
         e.target.reset();
         setTimeout(() => formSuccess.classList.remove('show'), 8000);
       } else {
