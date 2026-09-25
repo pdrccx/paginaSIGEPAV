@@ -7,12 +7,9 @@
 <title>SIGEPAV · Sistema de Gestión del Parque Vehicular</title>
 <link rel="icon" type="image/png" href="logo-sigepav-actualizado.png">
 
-<!-- Tipografías de Google -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Font Awesome para iconos -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -20,203 +17,234 @@
      VARIABLES Y RESET
      =========================== */
   :root {
-    --azul-900: #001a3d;
-    --azul-800: #002b60;
-    --azul-700: #003d80;
-    --azul-600: #006dc8;
-    --azul-500: #1e88e5;
-    --guindo: #6d0e23;
-    --guindo-claro: #a13b52;
-    --gris-bg: #f5f7fb;
-    --gris-borde: #d4dae6;
-    --gris-texto: #555;
-    --texto: #1a1a1a;
-    --blanco: #ffffff;
+    --navy-950: #04091a;
+    --navy-900: #071127;
+    --navy-800: #0c1f3d;
+    --navy-700: #123058;
+    --navy-600: #17457f;
+
+    --blue-700: #1554d1;
+    --blue-600: #1e6fff;
+    --blue-500: #4d94ff;
+    --blue-100: #e6f0ff;
+
+    --cyan-500: #06b6d4;
+    --cyan-400: #22d3ee;
+    --cyan-300: #7dd3fc;
+
+    --ink: #0a1730;
+    --slate: #5b6b85;
+    --bg: #f3f6fc;
+    --line: #dde5f1;
+    --white: #ffffff;
+
+    --grad-accent: linear-gradient(135deg, var(--blue-600), var(--cyan-400));
+    --grad-deep: linear-gradient(160deg, var(--navy-900) 0%, var(--navy-800) 55%, var(--navy-700) 100%);
 
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Manrope', sans-serif;
 
-    --container: 1200px;
-    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --container: 1240px;
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-lg: 0 30px 70px rgba(7, 17, 39, 0.18);
+    --shadow-md: 0 14px 40px rgba(7, 17, 39, 0.10);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: auto; }
   body {
     font-family: var(--font-body);
-    color: var(--texto);
+    color: var(--ink);
     line-height: 1.6;
-    background: var(--blanco);
+    background: var(--white);
     overflow-x: hidden;
   }
 
   /* ===========================
      UTILIDADES
      =========================== */
-  .container {
-    max-width: var(--container);
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
 
   .section-tag {
-    display: inline-block;
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    color: var(--azul-600);
-    font-weight: 700;
-    margin-bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--blue-600);
+    font-weight: 800;
+    margin-bottom: 18px;
     text-transform: uppercase;
+  }
+  .section-tag::before {
+    content: '';
+    width: 26px; height: 2px;
+    background: var(--grad-accent);
+    border-radius: 2px;
   }
 
   .section-title {
     font-family: var(--font-display);
-    font-size: clamp(28px, 4vw, 44px);
+    font-size: clamp(32px, 4.6vw, 54px);
     font-weight: 700;
-    color: var(--azul-800);
-    line-height: 1.1;
-    margin-bottom: 16px;
-    letter-spacing: -0.02em;
+    color: var(--navy-800);
+    line-height: 1.05;
+    margin-bottom: 18px;
+    letter-spacing: -0.03em;
   }
-
   .section-title .accent {
-    color: var(--guindo);
+    background: var(--grad-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-style: italic;
   }
 
   .section-lead {
-    font-size: 17px;
-    color: var(--gris-texto);
-    max-width: 640px;
-    margin-bottom: 48px;
+    font-size: 18px;
+    color: var(--slate);
+    max-width: 680px;
+    margin-bottom: 52px;
     line-height: 1.6;
   }
+
+  .reveal { opacity: 0; transform: translateY(38px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal.d1 { transition-delay: .08s; }
+  .reveal.d2 { transition-delay: .16s; }
+  .reveal.d3 { transition-delay: .24s; }
+  .reveal.d4 { transition-delay: .32s; }
+  .reveal.d5 { transition-delay: .40s; }
 
   .btn {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 14px 28px;
+    padding: 16px 30px;
     font-family: var(--font-body);
     font-size: 15px;
-    font-weight: 600;
-    border-radius: 4px;
+    font-weight: 700;
+    border-radius: 10px;
     text-decoration: none;
     transition: var(--transition);
     cursor: pointer;
     border: none;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
   }
   .btn-primary {
-    background: var(--azul-800);
+    background: var(--grad-accent);
     color: white;
-    box-shadow: 0 4px 14px rgba(0, 43, 96, 0.25);
+    box-shadow: 0 10px 30px rgba(30, 111, 255, 0.35);
+    position: relative;
+    overflow: hidden;
   }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform .7s ease;
+  }
+  .btn-primary:hover::after { transform: translateX(120%); }
   .btn-primary:hover {
-    background: var(--azul-700);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(0, 43, 96, 0.35);
-  }
-  /* Variante del primary cuando vive sobre el hero oscuro */
-  .hero .btn-primary {
-    background: white;
-    color: var(--azul-800);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
-  }
-  .hero .btn-primary:hover {
-    background: var(--azul-100, #e8f1fb);
-    color: var(--azul-900);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
-  }
-  .btn-gold {
-    background: var(--guindo);
-    color: var(--azul-900);
-    box-shadow: 0 4px 14px rgba(212, 160, 23, 0.3);
-  }
-  .btn-gold:hover {
-    background: #b8881a;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(30, 111, 255, 0.5);
   }
   .btn-outline {
     background: transparent;
-    color: var(--azul-800);
-    border: 2px solid var(--azul-800);
+    color: var(--navy-800);
+    border: 2px solid var(--line);
   }
   .btn-outline:hover {
-    background: var(--azul-800);
-    color: white;
+    border-color: var(--blue-600);
+    color: var(--blue-600);
+    transform: translateY(-3px);
   }
-  /* Variante del outline cuando vive sobre el hero oscuro */
   .hero .btn-outline {
     color: white;
-    border-color: rgba(255, 255, 255, 0.45);
+    border-color: rgba(255, 255, 255, 0.35);
     background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(8px);
   }
   .hero .btn-outline:hover {
     background: white;
-    color: var(--azul-800);
+    color: var(--navy-800);
     border-color: white;
   }
   .btn i { font-size: 14px; }
 
   /* ===========================
+     TICKER (marquesina publicitaria)
+     =========================== */
+  .ticker {
+    background: var(--navy-950);
+    color: var(--cyan-300);
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+    position: relative;
+    z-index: 1001;
+  }
+  .ticker-track {
+    display: inline-block;
+    animation: marquee 32s linear infinite;
+    padding-left: 100%;
+  }
+  .ticker-track span { margin: 0 30px; }
+  .ticker-track i { color: var(--cyan-400); margin-right: 8px; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+
+  /* ===========================
      NAVEGACIÓN
      =========================== */
-nav {
+  nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 37px;
+    left: 0; right: 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 43, 96, 0.08);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-bottom: 1px solid rgba(7, 17, 39, 0.06);
     transition: var(--transition);
-}
+  }
   nav.scrolled {
     background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
-    border-bottom-color: rgba(0, 43, 96, 0.08);
+    box-shadow: 0 8px 30px rgba(7, 17, 39, 0.08);
+    top: 0;
   }
   .nav-inner {
     max-width: var(--container);
     margin: 0 auto;
-    padding: 14px 24px;
+    padding: 13px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-  }
-  .nav-logo img {
-    height: 42px;
-    width: auto;
-  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo img { height: 40px; width: auto; }
   .nav-logo .nav-brand {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 20px;
-    color: var(--azul-800);
+    color: var(--navy-800);
     letter-spacing: 0.02em;
-    transition: var(--transition);
   }
-  nav.scrolled .nav-logo .nav-brand { color: var(--azul-800); }
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-    align-items: center;
-  }
+  .nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
   .nav-links a {
-    color: var(--azul-800);
+    color: var(--navy-800);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14.5px;
     transition: color var(--transition);
     position: relative;
@@ -224,41 +252,28 @@ nav {
   .nav-links a:not(.btn)::after {
     content: '';
     position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--guindo);
+    bottom: -6px; left: 0;
+    width: 0; height: 2px;
+    background: var(--grad-accent);
+    border-radius: 2px;
     transition: width var(--transition);
   }
-  .nav-links a:not(.btn):hover::after {
-    width: 100%;
-  }
-  nav.scrolled .nav-links a:not(.btn) { color: var(--azul-800); }
-  .nav-links .btn {
-    padding: 10px 20px;
-    font-size: 14px;
-  }
+  .nav-links a:not(.btn):hover::after { width: 100%; }
+  .nav-links .btn { padding: 11px 22px; font-size: 14px; border-radius: 8px; }
   .mobile-toggle {
     display: none;
-    background: none;
-    border: none;
-     color: var(--azul-800);
-    font-size: 22px;
-    cursor: pointer;
+    background: none; border: none;
+    color: var(--navy-800);
+    font-size: 24px; cursor: pointer;
   }
-  nav.scrolled .mobile-toggle { color: var(--azul-800); }
 
   /* ===========================
      HERO
      =========================== */
   .hero {
     min-height: 100vh;
-    padding: 140px 24px 80px;
-    background:
-      radial-gradient(ellipse at top right, rgba(0, 109, 200, 0.35) 0%, transparent 60%),
-      radial-gradient(ellipse at bottom left, rgba(212, 160, 23, 0.10) 0%, transparent 55%),
-      linear-gradient(180deg, var(--azul-900) 0%, var(--azul-800) 100%);
+    padding: 190px 24px 100px;
+    background: var(--grad-deep);
     color: white;
     position: relative;
     overflow: hidden;
@@ -270,132 +285,151 @@ nav {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at 60% 40%, black 0%, transparent 75%);
     pointer-events: none;
   }
-  .hero::after {
-    content: '';
+  .hero-glow {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(180deg, transparent, #000d24);
+    border-radius: 50%;
+    filter: blur(90px);
     pointer-events: none;
-    z-index: 1;
+    opacity: 0.55;
   }
+  .hero-glow.g1 { width: 620px; height: 620px; top: -180px; right: -140px; background: radial-gradient(circle, rgba(30,111,255,.65), transparent 65%); animation: floatGlow 14s ease-in-out infinite; }
+  .hero-glow.g2 { width: 520px; height: 520px; bottom: -200px; left: -120px; background: radial-gradient(circle, rgba(34,211,238,.5), transparent 65%); animation: floatGlow 18s ease-in-out infinite reverse; }
+  @keyframes floatGlow {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.08); }
+  }
+
   .hero-grid {
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
+    grid-template-columns: 1.05fr 0.95fr;
     gap: 60px;
     align-items: center;
     max-width: var(--container);
     margin: 0 auto;
     position: relative;
     z-index: 2;
+    width: 100%;
   }
   .hero-eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 16px;
-    background: rgba(212, 160, 23, 0.20);
-    color: var(--guindo-claro);
+    padding: 9px 18px;
+    background: rgba(34, 211, 238, 0.12);
+    color: var(--cyan-300);
     font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
+    font-weight: 800;
+    letter-spacing: 0.18em;
     border-radius: 100px;
-    margin-bottom: 28px;
+    margin-bottom: 30px;
     text-transform: uppercase;
+    border: 1px solid rgba(34, 211, 238, 0.35);
     animation: fadeInUp 0.8s ease both;
-    border: 1px solid rgba(212, 160, 23, 0.35);
   }
   .hero-eyebrow .pulse {
-    width: 6px;
-    height: 6px;
-    background: var(--guindo);
+    width: 7px; height: 7px;
+    background: var(--cyan-400);
     border-radius: 50%;
-    box-shadow: 0 0 0 0 var(--guindo);
+    box-shadow: 0 0 0 0 var(--cyan-400);
     animation: pulse 2s infinite;
   }
   @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.6); }
-    70% { box-shadow: 0 0 0 12px rgba(212, 160, 23, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7); }
+    70% { box-shadow: 0 0 0 12px rgba(34, 211, 238, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
   }
   .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(40px, 6vw, 68px);
+    font-size: clamp(44px, 6.4vw, 82px);
     font-weight: 700;
-    line-height: 1;
+    line-height: 0.98;
     color: white;
-    letter-spacing: -0.03em;
-    margin-bottom: 24px;
+    letter-spacing: -0.035em;
+    margin-bottom: 26px;
     animation: fadeInUp 0.8s 0.1s ease both;
   }
-  .hero h1 .gold {
-    color: var(--guindo-claro);
+  .hero h1 .grad {
+    background: linear-gradient(120deg, var(--cyan-300), var(--cyan-400) 45%, var(--blue-500));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-style: italic;
     font-weight: 500;
   }
-  .hero h1 .underline {
-    position: relative;
+  .rotator {
     display: inline-block;
+    position: relative;
+    vertical-align: bottom;
+    min-width: 5.5ch;
+    height: 1.02em;
+    overflow: hidden;
   }
-  .hero h1 .underline::after {
-    content: '';
+  .rotator span {
     position: absolute;
-    bottom: 4px;
-    left: 0;
-    right: 0;
-    height: 8px;
-    background: rgba(212, 160, 23, 0.45);
-    z-index: -1;
+    left: 0; top: 0;
+    width: 100%;
+    background: linear-gradient(120deg, var(--cyan-300), var(--cyan-400));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: italic;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(100%);
+    animation: rotateWord 9s infinite;
   }
+  .rotator span:nth-child(2) { animation-delay: 3s; }
+  .rotator span:nth-child(3) { animation-delay: 6s; }
+  @keyframes rotateWord {
+    0% { opacity: 0; transform: translateY(100%); }
+    6% { opacity: 1; transform: translateY(0); }
+    28% { opacity: 1; transform: translateY(0); }
+    34% { opacity: 0; transform: translateY(-100%); }
+    100% { opacity: 0; transform: translateY(-100%); }
+  }
+
   .hero-text {
-    font-size: 19px;
-    color: rgba(255, 255, 255, 0.95);
-    margin-bottom: 36px;
-    max-width: 540px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.92);
+    margin-bottom: 38px;
+    max-width: 560px;
     line-height: 1.55;
     animation: fadeInUp 0.8s 0.2s ease both;
   }
-  .hero-text strong {
-    color: white;
-    font-weight: 700;
-  }
+  .hero-text strong { color: white; font-weight: 700; }
   .hero-actions {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    margin-bottom: 48px;
+    margin-bottom: 50px;
     animation: fadeInUp 0.8s 0.3s ease both;
   }
   .hero-stats {
     display: flex;
-    gap: 40px;
+    gap: 44px;
     flex-wrap: wrap;
     animation: fadeInUp 0.8s 0.4s ease both;
   }
-  .hero-stat {
-    border-left: 3px solid var(--guindo);
-    padding-left: 16px;
-  }
+  .hero-stat { border-left: 3px solid var(--cyan-400); padding-left: 16px; }
   .hero-stat .num {
     font-family: var(--font-display);
-    font-size: 28px;
+    font-size: 34px;
     font-weight: 700;
     color: white;
     line-height: 1;
   }
   .hero-stat .label {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.65);
-    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-top: 4px;
+    margin-top: 6px;
   }
 
   @keyframes fadeInUp {
@@ -403,1042 +437,823 @@ nav {
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* MOCKUP DEL HERO */
-  .hero-visual {
-    position: relative;
-    animation: fadeInUp 1s 0.5s ease both;
-  }
+  .hero-visual { position: relative; animation: fadeInUp 1s 0.5s ease both; }
   .mockup {
     background: white;
-    border-radius: 12px;
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.08),
-      0 30px 60px rgba(0, 43, 96, 0.18),
-      0 0 0 1px rgba(0, 43, 96, 0.04);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(30, 111, 255, 0.12);
     overflow: hidden;
     position: relative;
     z-index: 2;
-    transform: perspective(1200px) rotateY(-6deg) rotateX(3deg);
+    transform: perspective(1400px) rotateY(-7deg) rotateX(3deg);
     transform-style: preserve-3d;
   }
-  /* ========================================================
-     MOCKUP "REAL" — imita el menú principal verdadero de la app
-     ======================================================== */
-  .mockup.mockup-real { padding: 0; overflow: hidden; }
+  .mockup.mockup-real { padding: 0; }
 
   .real-navbar {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 10px 14px;
-    background: linear-gradient(180deg, #002b60, #003a7a);
+    display: flex; align-items: center; gap: 14px;
+    padding: 11px 15px;
+    background: var(--grad-deep);
     color: white;
   }
   .real-modulos {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    display: flex; align-items: center; gap: 6px;
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 999px;
     padding: 5px 12px;
-    font-size: 10.5px;
-    font-weight: 600;
+    font-size: 10.5px; font-weight: 600;
   }
   .real-brand {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 800;
-    font-family: var(--font-display);
-    font-size: 14px;
-    letter-spacing: 0.02em;
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 800; font-family: var(--font-display);
+    font-size: 14px; letter-spacing: 0.02em;
   }
   .real-brand-logo {
-    width: 28px;
-    height: 28px;
-    background: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 28px; height: 28px;
+    background: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
     overflow: hidden;
   }
   .real-brand-logo img { width: 90%; height: 90%; object-fit: contain; }
-  .real-navbar-right {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .real-navbar-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
   .real-bell {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.18);
+    display: flex; align-items: center; justify-content: center;
   }
   .real-user {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.18);
     border-radius: 999px;
     padding: 4px 10px 4px 4px;
-    font-size: 10.5px;
-    font-weight: 600;
-    max-width: 170px;
-    overflow: hidden;
+    font-size: 10.5px; font-weight: 600;
+    max-width: 170px; overflow: hidden;
   }
   .real-user-avatar {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle at 50% 35%, var(--azul-600), var(--azul-800)),
-      white;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 35%, var(--cyan-400), var(--blue-700));
     flex-shrink: 0;
     box-shadow: inset 0 0 0 2px white;
   }
 
-  .real-body {
-    background: var(--gris-bg);
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+  .real-body { background: var(--bg); padding: 15px; display: flex; flex-direction: column; gap: 12px; }
   .real-banner {
-    background: white;
-    border-radius: 10px;
-    padding: 12px 14px;
-    border-left: 4px solid var(--azul-600);
-    box-shadow: 0 1px 3px rgba(0, 43, 96, 0.06);
+    background: white; border-radius: 10px; padding: 13px 15px;
+    border-left: 4px solid var(--blue-600);
+    box-shadow: 0 1px 3px rgba(7, 17, 39, 0.06);
   }
-  .real-banner-title {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 14px;
-    color: var(--azul-800);
-  }
-  .real-banner-sub {
-    font-size: 10.5px;
-    color: var(--gris-texto);
-    margin-top: 2px;
-  }
+  .real-banner-title { font-family: var(--font-display); font-weight: 800; font-size: 14px; color: var(--navy-800); }
+  .real-banner-sub { font-size: 10.5px; color: var(--slate); margin-top: 2px; }
 
-  .real-kpis {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-  }
+  .real-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
   .real-kpi {
-    background: white;
-    border-radius: 10px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 1px 3px rgba(0, 43, 96, 0.06);
+    background: white; border-radius: 10px; padding: 10px;
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 1px 3px rgba(7, 17, 39, 0.06);
   }
   .real-kpi-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    background: #e8f1fb;
-    color: var(--azul-600);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--blue-100); color: var(--blue-600);
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
   .real-kpi-data { display: flex; flex-direction: column; line-height: 1.1; }
-  .real-kpi-num {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 18px;
-    color: var(--azul-800);
-  }
-  .real-kpi-lbl {
-    font-size: 9.5px;
-    color: var(--gris-texto);
-    margin-top: 2px;
-  }
+  .real-kpi-num { font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--navy-800); }
+  .real-kpi-lbl { font-size: 9.5px; color: var(--slate); margin-top: 2px; }
 
-  /* Decoración flotante */
   .floating-card {
-    position: absolute;
-    background: white;
-    border-radius: 10px;
-    padding: 14px;
-    box-shadow: 0 10px 30px rgba(0, 43, 96, 0.15);
-    z-index: 3;
-    animation: floatY 4s ease-in-out infinite;
+    position: absolute; background: white; border-radius: 12px; padding: 14px;
+    box-shadow: 0 18px 40px rgba(7, 17, 39, 0.18);
+    z-index: 3; animation: floatY 4.5s ease-in-out infinite;
+    border: 1px solid rgba(30, 111, 255, 0.08);
   }
-  .floating-qr {
-    bottom: -75px;
-    left: -30px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+  .floating-qr { bottom: -78px; left: -34px; display: flex; align-items: center; gap: 12px; }
   .qr-block {
-    width: 56px;
-    height: 56px;
-    background:
-      conic-gradient(from 0deg at 50% 50%, var(--azul-800) 0deg 90deg, white 90deg 180deg, var(--azul-800) 180deg 270deg, white 270deg 360deg);
-    border-radius: 6px;
-    position: relative;
+    width: 56px; height: 56px;
+    background: conic-gradient(from 0deg at 50% 50%, var(--navy-800) 0deg 90deg, white 90deg 180deg, var(--navy-800) 180deg 270deg, white 270deg 360deg);
+    border-radius: 6px; position: relative;
   }
-  .qr-block::before, .qr-block::after {
-    content: '';
-    position: absolute;
-    background: var(--azul-800);
-  }
-  .qr-block::before {
-    top: 6px; left: 6px;
-    width: 14px; height: 14px;
-    background: white;
-    border: 3px solid var(--azul-800);
-  }
-  .qr-block::after {
-    bottom: 6px; right: 6px;
-    width: 14px; height: 14px;
-    background: white;
-    border: 3px solid var(--azul-800);
-  }
-  .qr-text {
-    font-size: 11px;
-  }
-  .qr-text strong {
-    display: block;
-    color: var(--azul-800);
-    font-weight: 700;
-    font-size: 12px;
-  }
-  .qr-text span {
-    color: var(--gris-texto);
-    font-size: 10px;
-  }
+  .qr-block::before, .qr-block::after { content: ''; position: absolute; background: var(--navy-800); }
+  .qr-block::before { top: 6px; left: 6px; width: 14px; height: 14px; background: white; border: 3px solid var(--navy-800); }
+  .qr-block::after { bottom: 6px; right: 6px; width: 14px; height: 14px; background: white; border: 3px solid var(--navy-800); }
+  .qr-text { font-size: 11px; }
+  .qr-text strong { display: block; color: var(--navy-800); font-weight: 700; font-size: 12px; }
+  .qr-text span { color: var(--slate); font-size: 10px; }
 
-  .floating-ai {
-    top: 30px;
-    right: -30px;
-    animation-delay: -2s;
-  }
-  .ai-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .floating-ai { top: 26px; right: -32px; animation-delay: -2s; }
+  .ai-row { display: flex; align-items: center; gap: 10px; }
   .ai-icon {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--guindo), var(--guindo-claro));
-    color: var(--azul-900);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
+    width: 38px; height: 38px;
+    background: var(--grad-accent);
+    color: white; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+    box-shadow: 0 8px 20px rgba(30, 111, 255, 0.35);
   }
-  .ai-text {
-    font-size: 11px;
-  }
-  .ai-text strong { display: block; color: var(--azul-800); font-size: 12px; }
-  .ai-text span { color: var(--gris-texto); font-size: 10px; }
-
+  .ai-text { font-size: 11px; }
+  .ai-text strong { display: block; color: var(--navy-800); font-size: 12px; }
+  .ai-text span { color: var(--slate); font-size: 10px; }
   @keyframes floatY {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-12px); }
   }
 
   /* ===========================
-     TRANSPARENCIA PROACTIVA (sección destacada)
+     MÉTRICAS
+     =========================== */
+  .metrics {
+    background: var(--navy-950);
+    color: white;
+    padding: 70px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .metrics::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 0%, rgba(30,111,255,.28), transparent 55%),
+                radial-gradient(ellipse at 85% 100%, rgba(34,211,238,.22), transparent 55%);
+    pointer-events: none;
+  }
+  .metrics-grid {
+    max-width: var(--container);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+  .metric .metric-num {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 62px);
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(120deg, var(--cyan-300), var(--blue-500));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .metric .metric-lbl {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.65);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+
+  /* ===========================
+     TRANSPARENCIA
      =========================== */
   .transparency {
-    padding: 100px 24px;
-    background: linear-gradient(135deg, var(--azul-900) 0%, var(--azul-800) 50%, var(--azul-700) 100%);
+    padding: 120px 24px;
+    background: var(--grad-deep);
     color: white;
     position: relative;
     overflow: hidden;
   }
   .transparency::before {
     content: '';
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 50% 50%, black, transparent 80%);
     pointer-events: none;
   }
   .transparency::after {
     content: '';
-    position: absolute;
-    right: -200px;
-    top: -200px;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(212, 160, 23, 0.18) 0%, transparent 70%);
+    position: absolute; right: -200px; top: -200px;
+    width: 640px; height: 640px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.18) 0%, transparent 70%);
     pointer-events: none;
   }
   .transparency .container { position: relative; z-index: 2; }
-  .transparency .section-tag { color: var(--guindo); }
+  .transparency .section-tag { color: var(--cyan-300); }
   .transparency .section-title { color: white; }
-  .transparency .section-title .accent { color: var(--guindo-claro); }
-  .transparency .section-lead { color: rgba(255, 255, 255, 0.85); max-width: 720px; }
+  .transparency .section-title .accent {
+    background: linear-gradient(120deg, var(--cyan-300), var(--cyan-400));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .transparency .section-lead { color: rgba(255, 255, 255, 0.82); max-width: 760px; }
 
   .transparency-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-    margin-top: 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    align-items: center; margin-top: 40px;
   }
-  .transp-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+  .transp-steps { display: flex; flex-direction: column; gap: 18px; }
   .transp-step {
-    display: flex;
-    gap: 20px;
-    padding: 24px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
+    display: flex; gap: 20px; padding: 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
     backdrop-filter: blur(10px);
     transition: var(--transition);
   }
   .transp-step:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateX(8px);
-    border-color: var(--guindo);
+    background: rgba(34, 211, 238, 0.08);
+    transform: translateX(10px);
+    border-color: rgba(34, 211, 238, 0.5);
   }
   .step-number {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    background: var(--guindo);
-    color: var(--azul-900);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 20px;
+    flex-shrink: 0; width: 50px; height: 50px;
+    background: var(--grad-accent); color: white;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 20px;
+    box-shadow: 0 8px 22px rgba(30, 111, 255, 0.4);
   }
-  .step-content h4 {
-    font-family: var(--font-display);
-    font-size: 19px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: white;
-  }
-  .step-content p {
-    font-size: 14.5px;
-    color: rgba(255, 255, 255, 0.75);
-    line-height: 1.55;
-  }
+  .step-content h4 { font-family: var(--font-display); font-size: 19px; font-weight: 600; margin-bottom: 6px; color: white; }
+  .step-content p { font-size: 14.5px; color: rgba(255, 255, 255, 0.72); line-height: 1.55; }
 
-  /* QR demo visual */
   .qr-demo {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    position: relative;
+    border-radius: 20px; padding: 44px; text-align: center;
+    backdrop-filter: blur(10px); position: relative;
   }
   .qr-big {
-    width: 180px;
-    height: 180px;
-    margin: 0 auto 24px;
-    background: white;
-    border-radius: 12px;
-    padding: 14px;
-    position: relative;
-    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.1);
+    width: 190px; height: 190px; margin: 0 auto 26px;
+    background: white; border-radius: 14px; padding: 15px;
+    box-shadow: 0 0 0 10px rgba(34, 211, 238, 0.12), 0 20px 50px rgba(0,0,0,.3);
+    animation: floatY 5s ease-in-out infinite;
   }
   .qr-pattern {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     background:
-      radial-gradient(circle at 20% 20%, var(--azul-800) 0% 8%, transparent 8%),
-      radial-gradient(circle at 80% 20%, var(--azul-800) 0% 8%, transparent 8%),
-      radial-gradient(circle at 20% 80%, var(--azul-800) 0% 8%, transparent 8%),
-      conic-gradient(from 45deg at 50% 50%, var(--azul-800) 25%, white 25% 50%, var(--azul-800) 50% 75%, white 75%);
+      radial-gradient(circle at 20% 20%, var(--navy-800) 0% 8%, transparent 8%),
+      radial-gradient(circle at 80% 20%, var(--navy-800) 0% 8%, transparent 8%),
+      radial-gradient(circle at 20% 80%, var(--navy-800) 0% 8%, transparent 8%),
+      conic-gradient(from 45deg at 50% 50%, var(--navy-800) 25%, white 25% 50%, var(--navy-800) 50% 75%, white 75%);
     background-size: 100%, 100%, 100%, 16px 16px;
     border-radius: 4px;
   }
-  .qr-demo h3 {
-    font-family: var(--font-display);
-    font-size: 22px;
-    margin-bottom: 8px;
-    color: white;
-  }
-  .qr-demo p {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 14px;
-    line-height: 1.5;
-  }
+  .qr-demo h3 { font-family: var(--font-display); font-size: 24px; margin-bottom: 8px; color: white; }
+  .qr-demo p { color: rgba(255, 255, 255, 0.72); font-size: 14.5px; line-height: 1.5; }
   .qr-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--guindo);
-    color: var(--azul-900);
-    padding: 8px 16px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    margin-top: 20px;
-    text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--grad-accent); color: white;
+    padding: 9px 18px; border-radius: 100px;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+    margin-top: 22px; text-transform: uppercase;
+    box-shadow: 0 10px 26px rgba(30, 111, 255, 0.4);
   }
 
   /* ===========================
-     CARACTERÍSTICAS (módulos)
+     FEATURES
      =========================== */
-  .features {
-    padding: 100px 24px;
-    background: var(--gris-bg);
-    position: relative;
-  }
+  .features { padding: 120px 24px; background: var(--bg); position: relative; }
+  .features.white { background: white; }
   .features-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-top: 20px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 22px; margin-top: 20px;
   }
   .feature {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 24px;
-    border: 1px solid var(--gris-borde);
+    background: white; border-radius: 16px; padding: 30px 26px;
+    border: 1px solid var(--line);
     transition: var(--transition);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
   .feature::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--azul-600);
-    transform: scaleX(0);
-    transform-origin: left;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--grad-accent);
+    transform: scaleX(0); transform-origin: left;
     transition: transform var(--transition);
   }
   .feature:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(0, 43, 96, 0.1);
-    border-color: var(--azul-600);
+    transform: translateY(-8px);
+    box-shadow: 0 26px 50px rgba(7, 17, 39, 0.12);
+    border-color: transparent;
   }
   .feature:hover::before { transform: scaleX(1); }
-  .feature:nth-child(4n+1)::before { background: var(--azul-800); }
-  .feature:nth-child(4n+2)::before { background: var(--azul-600); }
-  .feature:nth-child(4n+3)::before { background: var(--guindo); }
-  .feature:nth-child(4n+4)::before { background: var(--azul-500); }
 
   .feature-icon {
-    width: 52px;
-    height: 52px;
-    background: linear-gradient(135deg, var(--azul-800), var(--azul-600));
-    color: white;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    margin-bottom: 18px;
-  }
-  .feature:nth-child(4n+3) .feature-icon {
-    background: linear-gradient(135deg, var(--guindo), #b8881a);
-    color: var(--azul-900);
+    width: 56px; height: 56px;
+    background: var(--grad-accent);
+    color: white; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin-bottom: 20px;
+    font-family: var(--font-display); font-weight: 700;
+    box-shadow: 0 10px 24px rgba(30, 111, 255, 0.25);
   }
   .feature h4 {
-    font-family: var(--font-display);
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--azul-800);
-    margin-bottom: 8px;
-    letter-spacing: -0.01em;
+    font-family: var(--font-display); font-size: 17px; font-weight: 600;
+    color: var(--navy-800); margin-bottom: 8px; letter-spacing: -0.01em;
   }
-  .feature p {
-    font-size: 14px;
-    color: var(--gris-texto);
-    line-height: 1.55;
-  }
+  .feature p { font-size: 14px; color: var(--slate); line-height: 1.55; }
 
   /* ===========================
      CÓMO FUNCIONA
      =========================== */
-  .how {
-    padding: 100px 24px;
-    background: white;
-  }
+  .how { padding: 120px 24px; background: white; }
   .how-flow {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    margin-top: 40px;
-    position: relative;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; margin-top: 50px; position: relative;
   }
   .how-flow::before {
-    content: '';
-    position: absolute;
-    top: 38px;
-    left: 12.5%;
-    right: 12.5%;
+    content: ''; position: absolute; top: 40px; left: 12.5%; right: 12.5%;
     height: 2px;
-    background: linear-gradient(to right, transparent, var(--gris-borde) 10%, var(--gris-borde) 90%, transparent);
+    background: linear-gradient(to right, transparent, var(--line) 10%, var(--line) 90%, transparent);
     z-index: 0;
   }
-  .how-step {
-    text-align: center;
-    padding: 0 16px;
-    position: relative;
-    z-index: 1;
-  }
+  .how-step { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
   .how-step .num-circle {
-    width: 76px;
-    height: 76px;
-    margin: 0 auto 24px;
-    background: white;
-    border: 3px solid var(--azul-800);
+    width: 80px; height: 80px; margin: 0 auto 26px;
+    background: white; border: 3px solid var(--navy-800);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--azul-800);
-    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 27px; font-weight: 700;
+    color: var(--navy-800); position: relative;
     transition: var(--transition);
   }
   .how-step:hover .num-circle {
-    background: var(--azul-800);
-    color: white;
-    transform: scale(1.08);
+    background: var(--grad-accent); color: white;
+    border-color: transparent; transform: scale(1.08);
+    box-shadow: 0 14px 30px rgba(30, 111, 255, 0.35);
   }
   .how-step .num-circle .ico {
-    position: absolute;
-    bottom: -10px;
-    right: -10px;
-    width: 32px;
-    height: 32px;
-    background: var(--guindo);
-    color: var(--azul-900);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    border: 3px solid white;
+    position: absolute; bottom: -10px; right: -10px;
+    width: 34px; height: 34px;
+    background: var(--cyan-400); color: var(--navy-900);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; border: 3px solid white;
   }
   .how-step h4 {
-    font-family: var(--font-display);
-    font-size: 17px;
-    color: var(--azul-800);
-    margin-bottom: 8px;
-    font-weight: 600;
+    font-family: var(--font-display); font-size: 17px;
+    color: var(--navy-800); margin-bottom: 8px; font-weight: 600;
   }
-  .how-step p {
-    font-size: 14px;
-    color: var(--gris-texto);
-    line-height: 1.55;
-  }
+  .how-step p { font-size: 14px; color: var(--slate); line-height: 1.55; }
 
   /* ===========================
      PRECIOS
      =========================== */
-  .pricing {
-    padding: 100px 24px;
-    background: var(--gris-bg);
-    position: relative;
-  }
+  .pricing { padding: 120px 24px; background: var(--bg); position: relative; }
   .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 40px;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .pricing-grid.pricing-single {
-    grid-template-columns: 1fr;
-    max-width: 480px;
+    display: grid; grid-template-columns: 1fr;
+    max-width: 560px; margin: 0 auto;
   }
   .plan {
-    background: white;
-    border: 1px solid var(--gris-borde);
-    border-radius: 16px;
-    padding: 36px 32px;
-    position: relative;
-    transition: var(--transition);
-  }
-  .plan:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(0, 43, 96, 0.1);
+    background: white; border: 1px solid var(--line);
+    border-radius: 24px; padding: 46px 42px; position: relative;
+    transition: var(--transition); overflow: hidden;
   }
   .plan.featured {
-    background: linear-gradient(135deg, var(--azul-900), var(--azul-800));
+    background: var(--grad-deep);
     color: white;
-    border: 2px solid var(--guindo);
-    box-shadow: 0 20px 50px rgba(0, 43, 96, 0.2);
-    transform: scale(1.04);
+    border: 2px solid rgba(34, 211, 238, 0.35);
+    box-shadow: 0 30px 70px rgba(7, 17, 39, 0.28);
   }
-  .plan.featured:hover { transform: scale(1.04) translateY(-6px); }
+  .plan.featured::after {
+    content: '';
+    position: absolute; top: -120px; right: -120px;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.22), transparent 70%);
+    pointer-events: none;
+  }
   .plan-badge {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--guindo);
-    color: var(--azul-900);
-    padding: 6px 18px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--grad-accent); color: white;
+    padding: 8px 20px; border-radius: 100px;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; margin-bottom: 22px;
+    box-shadow: 0 10px 26px rgba(30, 111, 255, 0.4);
+    position: relative; z-index: 2;
   }
   .plan-name {
-    font-family: var(--font-display);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--azul-600);
-    margin-bottom: 10px;
+    font-family: var(--font-display); font-size: 15px; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--cyan-300); margin-bottom: 12px;
+    position: relative; z-index: 2;
   }
-  .plan.featured .plan-name { color: var(--guindo-claro); }
   .plan-desc {
-    font-size: 13px;
-    color: var(--gris-texto);
-    margin-bottom: 24px;
-    min-height: 40px;
+    font-size: 14.5px; color: rgba(255,255,255,0.78);
+    margin-bottom: 30px; line-height: 1.55; position: relative; z-index: 2;
   }
-  .plan.featured .plan-desc { color: rgba(255,255,255,0.75); }
+  .price-row {
+    display: flex; align-items: flex-end; gap: 10px;
+    margin-bottom: 8px; position: relative; z-index: 2;
+  }
   .plan-price {
     font-family: var(--font-display);
-    font-size: 44px;
-    font-weight: 700;
-    color: var(--azul-800);
-    line-height: 1;
-    margin-bottom: 4px;
+    font-size: clamp(52px, 7vw, 74px);
+    font-weight: 700; line-height: 0.95;
+    color: white; letter-spacing: -0.03em;
   }
-  .plan.featured .plan-price { color: white; }
   .plan-price small {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--gris-texto);
+    font-size: 20px; font-weight: 600;
+    color: rgba(255,255,255,0.75); padding-bottom: 8px;
   }
-  .plan.featured .plan-price small { color: rgba(255,255,255,0.7); }
+  .plan-price-sub {
+    font-size: 15px; color: var(--cyan-300); font-weight: 700;
+    margin-bottom: 6px; position: relative; z-index: 2;
+  }
   .plan-billing {
-    font-size: 12px;
-    color: var(--gris-texto);
-    margin-bottom: 28px;
-    letter-spacing: 0.05em;
+    font-size: 13px; color: rgba(255,255,255,0.6);
+    margin-bottom: 30px; letter-spacing: 0.03em;
+    position: relative; z-index: 2;
   }
-  .plan.featured .plan-billing { color: rgba(255,255,255,0.65); }
-  .plan-list {
-    list-style: none;
-    margin-bottom: 32px;
-  }
+  .plan-list { list-style: none; margin-bottom: 34px; position: relative; z-index: 2; }
   .plan-list li {
-    padding: 8px 0;
-    font-size: 14px;
-    color: var(--texto);
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    border-bottom: 1px solid var(--gris-borde);
-  }
-  .plan.featured .plan-list li {
-    color: rgba(255,255,255,0.9);
+    padding: 11px 0; font-size: 14.5px; color: rgba(255,255,255,0.9);
+    display: flex; align-items: flex-start; gap: 12px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
   .plan-list li:last-child { border-bottom: none; }
   .plan-list .check {
-    color: var(--azul-600);
-    font-size: 13px;
-    flex-shrink: 0;
-    margin-top: 3px;
+    color: var(--cyan-400); font-size: 14px; flex-shrink: 0; margin-top: 3px;
   }
-  .plan.featured .plan-list .check { color: var(--guindo-claro); }
-  .plan .btn { width: 100%; justify-content: center; }
+  .plan .btn { width: 100%; justify-content: center; position: relative; z-index: 2; }
 
   /* ===========================
      CONTACTO
      =========================== */
-  .contact {
-    padding: 100px 24px;
-    background: var(--gris-bg);
-  }
+  .contact { padding: 120px 24px; background: white; }
   .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 60px;
-    align-items: start;
-    max-width: 1100px;
-    margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.15fr; gap: 64px;
+    align-items: start; max-width: 1120px; margin: 0 auto;
   }
-  .contact-info {
-    padding-top: 8px;
-  }
-  .contact-channels {
-    margin-top: 36px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-  .channel {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-  }
+  .contact-info { padding-top: 8px; }
+  .contact-channels { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
+  .channel { display: flex; gap: 16px; align-items: center; }
   .channel-icon {
-    width: 48px;
-    height: 48px;
-    background: white;
-    border: 1px solid var(--gris-borde);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    color: var(--azul-800);
-    flex-shrink: 0;
+    width: 50px; height: 50px;
+    background: var(--blue-100); border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: var(--blue-600); flex-shrink: 0;
   }
   .channel-info .label {
-    font-size: 11px;
-    color: var(--gris-texto);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: 600;
+    font-size: 11px; color: var(--slate); letter-spacing: 0.1em;
+    text-transform: uppercase; font-weight: 700;
   }
-  .channel-info .value {
-    font-size: 15px;
-    color: var(--azul-800);
-    font-weight: 600;
-    margin-top: 2px;
-  }
+  .channel-info .value { font-size: 15px; color: var(--navy-800); font-weight: 700; margin-top: 2px; }
   .channel-info .value a { color: inherit; text-decoration: none; }
-  .channel-info .value a:hover { color: var(--azul-600); }
+  .channel-info .value a:hover { color: var(--blue-600); }
 
   .contact-form {
-    background: white;
-    border-radius: 16px;
-    padding: 40px;
-    box-shadow: 0 20px 50px rgba(0, 43, 96, 0.08);
-    border: 1px solid var(--gris-borde);
+    background: var(--bg); border-radius: 20px; padding: 42px;
+    box-shadow: var(--shadow-md); border: 1px solid var(--line);
   }
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { display: flex; flex-direction: column; }
   .form-group.full { grid-column: 1 / -1; }
   .form-group label {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--azul-800);
-    margin-bottom: 6px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    font-size: 12px; font-weight: 800; color: var(--navy-800);
+    margin-bottom: 7px; letter-spacing: 0.05em; text-transform: uppercase;
   }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: 12px 14px;
-    border: 1px solid var(--gris-borde);
-    border-radius: 8px;
-    font-family: var(--font-body);
-    font-size: 14.5px;
-    color: var(--texto);
-    background: white;
-    transition: var(--transition);
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 13px 15px; border: 1px solid var(--line); border-radius: 10px;
+    font-family: var(--font-body); font-size: 14.5px; color: var(--ink);
+    background: white; transition: var(--transition);
   }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--azul-600);
-    box-shadow: 0 0 0 3px rgba(0, 109, 200, 0.12);
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--blue-600);
+    box-shadow: 0 0 0 4px rgba(30, 111, 255, 0.12);
   }
-  .form-group textarea {
-    resize: vertical;
-    min-height: 100px;
-    font-family: var(--font-body);
-  }
-  .form-submit {
-    width: 100%;
-    justify-content: center;
-    margin-top: 8px;
-  }
+  .form-group textarea { resize: vertical; min-height: 100px; font-family: var(--font-body); }
+  .form-submit { width: 100%; justify-content: center; margin-top: 8px; }
   .form-success {
-    display: none;
-    background: rgba(40, 200, 64, 0.12);
-    color: #1a7e2d;
-    padding: 14px 18px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    font-size: 14px;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid rgba(40, 200, 64, 0.25);
-    line-height: 1.4;
+    display: none; background: rgba(16, 185, 129, 0.1); color: #0a7a55;
+    padding: 14px 18px; border-radius: 10px; margin-bottom: 16px;
+    font-size: 14px; align-items: center; gap: 10px;
+    border: 1px solid rgba(16, 185, 129, 0.25); line-height: 1.4;
   }
   .form-success.show { display: flex; }
-  .form-success.error {
-    background: rgba(220, 38, 38, 0.08);
-    color: #991b1b;
-    border-color: rgba(220, 38, 38, 0.25);
-  }
+  .form-success.error { background: rgba(220, 38, 38, 0.08); color: #991b1b; border-color: rgba(220, 38, 38, 0.25); }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .form-submit:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    transform: none !important;
-  }
+  .form-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none !important; }
 
   /* ===========================
      FAQ
      =========================== */
-  .faq {
-    padding: 100px 24px;
-    background: white;
-  }
-  .faq-list {
-    max-width: 800px;
-    margin: 40px auto 0;
-  }
-  .faq-item {
-    border-bottom: 1px solid var(--gris-borde);
-    padding: 0;
-  }
+  .faq { padding: 120px 24px; background: var(--bg); }
+  .faq-list { max-width: 820px; margin: 44px auto 0; }
+  .faq-item { border-bottom: 1px solid var(--line); }
   .faq-item:last-child { border-bottom: none; }
   .faq-question {
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 22px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: var(--font-display);
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--azul-800);
-    cursor: pointer;
-    text-align: left;
+    width: 100%; background: none; border: none; padding: 24px 0;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-display); font-size: 17px; font-weight: 600;
+    color: var(--navy-800); cursor: pointer; text-align: left;
     transition: color var(--transition);
   }
-  .faq-question:hover { color: var(--azul-600); }
+  .faq-question:hover { color: var(--blue-600); }
   .faq-question .icon {
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    background: var(--gris-bg);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    color: var(--azul-800);
+    flex-shrink: 0; width: 38px; height: 38px;
+    background: white; border: 1px solid var(--line);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 15px; color: var(--navy-800);
     transition: transform var(--transition), background var(--transition);
     margin-left: 16px;
   }
   .faq-item.active .faq-question .icon {
-    transform: rotate(45deg);
-    background: var(--guindo);
-    color: var(--azul-900);
+    transform: rotate(45deg); background: var(--grad-accent);
+    color: white; border-color: transparent;
   }
   .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-    color: var(--gris-texto);
-    font-size: 15px;
-    line-height: 1.65;
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.45s ease;
+    color: var(--slate); font-size: 15px; line-height: 1.65;
   }
-  .faq-answer-inner { padding: 0 0 22px 0; }
-  .faq-item.active .faq-answer { max-height: 300px; }
+  .faq-answer-inner { padding: 0 0 24px 0; }
+  .faq-item.active .faq-answer { max-height: 340px; }
 
   /* ===========================
      FOOTER
      =========================== */
   footer {
-    background: var(--azul-900);
-    color: rgba(255,255,255,0.7);
-    padding: 60px 24px 30px;
-    position: relative;
+    background: var(--navy-950);
+    color: rgba(255,255,255,0.68);
+    padding: 66px 24px 32px; position: relative;
   }
   footer::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    background: linear-gradient(to right, var(--azul-800), var(--guindo), var(--azul-800));
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--grad-accent);
   }
   .footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 40px;
-    max-width: var(--container);
-    margin: 0 auto 40px;
+    display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px;
+    max-width: var(--container); margin: 0 auto 42px;
   }
-  .footer-brand {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 16px;
-  }
-  .footer-brand img { height: 50px; background: white; padding: 6px; border-radius: 6px; }
-  .footer-brand .name {
-    font-family: var(--font-display);
-    font-size: 22px;
-    color: white;
-    font-weight: 700;
-  }
-  .footer-about {
-    font-size: 14px;
-    line-height: 1.6;
-    max-width: 340px;
-    color: rgba(255,255,255,0.6);
-  }
+  .footer-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+  .footer-brand img { height: 50px; background: white; padding: 6px; border-radius: 8px; }
+  .footer-brand .name { font-family: var(--font-display); font-size: 22px; color: white; font-weight: 700; }
+  .footer-about { font-size: 14px; line-height: 1.6; max-width: 340px; color: rgba(255,255,255,0.55); }
   .footer-col h5 {
-    color: white;
-    font-family: var(--font-display);
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    color: white; font-family: var(--font-display); font-size: 14px;
+    font-weight: 600; margin-bottom: 16px; letter-spacing: 0.05em; text-transform: uppercase;
   }
   .footer-col ul { list-style: none; }
   .footer-col ul li { margin-bottom: 10px; }
-  .footer-col ul a {
-    color: rgba(255,255,255,0.6);
-    text-decoration: none;
-    font-size: 14px;
-    transition: color var(--transition);
-  }
-  .footer-col ul a:hover { color: var(--guindo); }
+  .footer-col ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color var(--transition); }
+  .footer-col ul a:hover { color: var(--cyan-400); }
   .footer-bottom {
-    max-width: var(--container);
-    margin: 0 auto;
-    padding-top: 30px;
+    max-width: var(--container); margin: 0 auto; padding-top: 30px;
     border-top: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.5);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px; font-size: 13px; color: rgba(255,255,255,0.5);
   }
   .footer-bottom strong { color: white; }
+
+  /* ============================================================
+     🎬 MODO PANTALLA PUBLICITARIA (ATTRACT LOOP)
+     ============================================================ */
+
+  /* Barra de progreso del recorrido automático */
+  .progress-bar {
+    position: fixed; top: 0; left: 0;
+    height: 4px; width: 0;
+    background: var(--grad-accent);
+    z-index: 3000;
+    box-shadow: 0 0 14px rgba(34, 211, 238, 0.7);
+    transition: width 0.12s linear;
+    pointer-events: none;
+  }
+
+  /* Splash inicial */
+  .splash {
+    position: fixed; inset: 0; z-index: 5000;
+    background: var(--grad-deep);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 26px;
+    color: white; text-align: center; padding: 40px;
+    transition: opacity 0.9s ease, visibility 0.9s;
+    cursor: pointer;
+  }
+  .splash::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 50% 50%, black, transparent 75%);
+    pointer-events: none;
+  }
+  .splash.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+  .splash-logo {
+    height: 130px; background: white; padding: 16px;
+    border-radius: 24px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.45), 0 0 0 12px rgba(34,211,238,.12);
+    animation: splashIn 1.1s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes splashIn {
+    from { opacity: 0; transform: scale(.8) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .splash h1 {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 9vw, 128px);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(120deg, #ffffff, var(--cyan-300));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: splashIn 1.1s 0.15s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .splash p {
+    font-size: clamp(16px, 1.8vw, 24px);
+    color: var(--cyan-300);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 800;
+    animation: splashIn 1.1s 0.3s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .splash .splash-sub {
+    font-size: clamp(15px, 1.4vw, 19px);
+    color: rgba(255,255,255,.7);
+    letter-spacing: 0.02em;
+    text-transform: none;
+    font-weight: 500;
+    max-width: 700px;
+    animation: splashIn 1.1s 0.45s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .splash .splash-skip {
+    margin-top: 20px; font-size: 12px;
+    letter-spacing: 0.2em; color: rgba(255,255,255,.45);
+    text-transform: uppercase; font-weight: 700;
+    animation: pulse 2s infinite;
+  }
+
+  /* Controles flotantes */
+  .playback-controls {
+    position: fixed; bottom: 26px; right: 26px;
+    z-index: 2500;
+    display: flex; gap: 12px;
+    opacity: 0.32; transition: opacity .35s;
+  }
+  .playback-controls:hover { opacity: 1; }
+  .pb-btn {
+    width: 54px; height: 54px; border-radius: 50%; border: none;
+    background: var(--navy-900); color: white;
+    font-size: 18px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 14px 34px rgba(0,0,0,.35), 0 0 0 1px rgba(34,211,238,.25);
+    transition: var(--transition);
+  }
+  .pb-btn:hover { background: var(--blue-600); transform: scale(1.1); }
+
+  /* Attract overlay (idle) */
+  .attract-overlay {
+    position: fixed; inset: 0; z-index: 4500;
+    background: radial-gradient(circle at 50% 50%, rgba(7,17,39,.94), rgba(4,9,26,.99));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 30px;
+    text-align: center; padding: 40px;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .7s ease, visibility .7s ease;
+    cursor: pointer;
+  }
+  .attract-overlay::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(30,111,255,.35), transparent 55%),
+      radial-gradient(ellipse at 85% 90%, rgba(34,211,238,.3), transparent 55%);
+    pointer-events: none;
+  }
+  .attract-overlay > * { position: relative; z-index: 2; }
+  body.idle .attract-overlay { opacity: 1; visibility: visible; pointer-events: auto; }
+  body.idle { cursor: none; }
+  body.idle .playback-controls { opacity: 0; pointer-events: none; }
+  body.idle nav, body.idle .ticker { filter: brightness(.4); }
+
+  .attract-logo {
+    height: 110px; background: white; padding: 12px; border-radius: 22px;
+    box-shadow: 0 30px 70px rgba(0,0,0,.5), 0 0 0 10px rgba(34,211,238,.14);
+    animation: floatY 5s ease-in-out infinite;
+  }
+  .attract-overlay h2 {
+    font-family: var(--font-display);
+    font-size: clamp(44px, 7.5vw, 96px);
+    letter-spacing: -0.035em; line-height: 1;
+    color: white;
+  }
+  .attract-overlay h2 .grad {
+    background: linear-gradient(120deg, var(--cyan-300), var(--cyan-400));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    font-style: italic;
+  }
+  .attract-overlay p {
+    color: rgba(255,255,255,.75);
+    font-size: clamp(16px, 1.6vw, 22px);
+    max-width: 720px;
+    line-height: 1.5;
+  }
+  .attract-tap {
+    padding: 18px 40px; border-radius: 100px;
+    background: var(--grad-accent); color: white;
+    font-weight: 800; letter-spacing: 0.2em;
+    text-transform: uppercase; font-size: 14px;
+    box-shadow: 0 0 0 0 rgba(30,111,255,.6);
+    animation: pulseBtn 2.2s infinite;
+  }
+  @keyframes pulseBtn {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(30,111,255,.6); }
+    50% { transform: scale(1.06); box-shadow: 0 0 0 22px rgba(30,111,255,0); }
+  }
+
+  /* Modo signage: tipografías más grandes para distancia */
+  body.signage .hero h1 { font-size: clamp(56px, 7vw, 104px); }
+  body.signage .hero-text { font-size: 24px; max-width: 640px; }
+  body.signage .section-title { font-size: clamp(40px, 4.4vw, 68px); }
+  body.signage .section-lead { font-size: 21px; }
+  body.signage .section-tag { font-size: 14px; }
+  body.signage .feature h4,
+  body.signage .how-step h4 { font-size: 20px; }
+  body.signage .feature p,
+  body.signage .how-step p,
+  body.signage .step-content p { font-size: 16px; line-height: 1.6; }
+  body.signage .nav-links a { font-size: 16px; }
+  body.signage .metric .metric-num { font-size: clamp(52px, 5.4vw, 78px); }
+  body.signage .metric .metric-lbl { font-size: 15px; }
+  body.signage .plan-price { font-size: clamp(64px, 8vw, 96px); }
 
   /* ===========================
      RESPONSIVE
      =========================== */
-  @media (min-width: 969px) { #personas .features-grid, #evolucion .features-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 969px) {
+    #personas .features-grid, #evolucion .features-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
   @media (max-width: 968px) {
+    nav { top: 34px; }
     .nav-links { display: none; }
     .nav-links.open {
-      display: flex;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: white;
-      flex-direction: column;
-      padding: 20px;
-      gap: 14px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      border-bottom: 1px solid rgba(0, 43, 96, 0.08);
+      display: flex; position: absolute; top: 100%; left: 0; right: 0;
+      background: white; flex-direction: column; padding: 20px; gap: 14px;
+      box-shadow: 0 12px 26px rgba(0,0,0,0.1);
+      border-bottom: 1px solid var(--line);
     }
-    /* Dentro del dropdown abierto los textos van en azul, independientemente del scroll */
-    .nav-links.open a:not(.btn) { color: var(--azul-800); }
     .mobile-toggle { display: block; }
-    .hero-grid,
-    .transparency-grid,
-    .contact-grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
+    .hero-grid, .transparency-grid, .contact-grid { grid-template-columns: 1fr; gap: 44px; }
     .features-grid { grid-template-columns: repeat(2, 1fr); }
-    .how-flow { grid-template-columns: repeat(2, 1fr); gap: 40px 0; }
+    .how-flow { grid-template-columns: repeat(2, 1fr); gap: 44px 0; }
     .how-flow::before { display: none; }
-    .pricing-grid { grid-template-columns: 1fr; }
-    .plan.featured { transform: none; }
-    .plan.featured:hover { transform: translateY(-6px); }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .form-row { grid-template-columns: 1fr; }
     .floating-card { display: none; }
     .mockup { transform: none; }
+    .playback-controls { bottom: 16px; right: 16px; }
+    .pb-btn { width: 46px; height: 46px; font-size: 16px; }
   }
   @media (max-width: 560px) {
     .features-grid { grid-template-columns: 1fr; }
     .how-flow { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
-    .hero { padding: 100px 16px 60px; }
-    .hero h1 { font-size: clamp(36px, 10vw, 48px); }
-    .hero-stats { gap: 18px 28px; }
-    .hero-stat { padding-left: 12px; }
-    .hero-stat .num { font-size: 24px; }
+    .metrics-grid { grid-template-columns: 1fr; }
+    .hero { padding: 150px 16px 70px; }
+    .hero h1 { font-size: clamp(38px, 11vw, 52px); }
     .hero-actions { flex-direction: column; gap: 12px; }
     .hero-actions .btn { width: 100%; justify-content: center; }
+    .plan { padding: 36px 26px; }
     .contact-form { padding: 28px 20px; }
     .real-kpis { grid-template-columns: repeat(2, 1fr); }
     .real-navbar { gap: 8px; padding: 8px 10px; }
     .real-user { max-width: 110px; font-size: 9.5px; }
-    .real-kpi { padding: 8px; }
-    .real-kpi-num { font-size: 16px; }
-    .real-kpi-lbl { font-size: 9px; }
-    /* Form: que los inputs sean cómodos en móvil */
-    .contact-form input,
-    .contact-form select,
-    .contact-form textarea { font-size: 16px; } /* evita zoom iOS */
-    .form-submit { width: 100%; padding: 16px; font-size: 15px; }
+    .contact-form input, .contact-form select, .contact-form textarea { font-size: 16px; }
+    .splash-logo { height: 90px; }
   }
 
-  /* Animaciones suaves al cargar (sin scroll observer, más confiable) */
-  .feature, .how-step, .plan, .transp-step, .faq-item {
-    animation: fadeInSoft 0.6s ease both;
-  }
-  @keyframes fadeInSoft {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   }
 </style>
 </head>
 <body>
 
+<!-- ============== BARRA DE PROGRESO ============== -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ============== SPLASH INICIAL ============== -->
+<div class="splash" id="splash">
+  <img src="logo-sigepav-actualizado.png" alt="SIGEPAV" class="splash-logo" onerror="this.style.display='none'">
+  <h1>SIGEPAV</h1>
+  <p>Transparencia vehicular institucional</p>
+  <div class="splash-sub">Gestión · Rendición de cuentas · Participación ciudadana</div>
+  <div class="splash-skip">▸ Iniciando recorrido…</div>
+</div>
+
+<!-- ============== TICKER ============== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span><i class="fa-solid fa-bolt"></i>Transparencia proactiva</span>
+    <span><i class="fa-solid fa-qrcode"></i>Consulta ciudadana por QR</span>
+    <span><i class="fa-solid fa-chart-line"></i>Dashboard ejecutivo en tiempo real</span>
+    <span><i class="fa-solid fa-car"></i>Control total de tu flotilla</span>
+    <span><i class="fa-solid fa-bolt"></i>Transparencia proactiva</span>
+    <span><i class="fa-solid fa-qrcode"></i>Consulta ciudadana por QR</span>
+    <span><i class="fa-solid fa-chart-line"></i>Dashboard ejecutivo en tiempo real</span>
+    <span><i class="fa-solid fa-car"></i>Control total de tu flotilla</span>
+  </div>
+</div>
+
 <!-- ============== NAVEGACIÓN ============== -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">
+    <a href="#inicio" class="nav-logo">
       <img src="logo-sigepav-actualizado.png" alt="SIGEPAV">
       <span class="nav-brand">SIGEPAV</span>
     </a>
@@ -1446,16 +1261,18 @@ nav {
       <li><a href="#transparencia">Transparencia</a></li>
       <li><a href="#caracteristicas">Características</a></li>
       <li><a href="#como-funciona">¿Cómo funciona?</a></li>
-      <li><a href="#precios">Implementación</a></li>
+      <li><a href="#precios">Precios</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="#contacto" class="btn btn-gold">Solicitar demo</a></li>
+      <li><a href="#contacto" class="btn btn-primary">Solicitar demo</a></li>
     </ul>
-    <button class="mobile-toggle" id="mobileToggle">☰</button>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menú">☰</button>
   </div>
 </nav>
 
 <!-- ============== HERO ============== -->
 <section class="hero" id="inicio">
+  <div class="hero-glow g1"></div>
+  <div class="hero-glow g2"></div>
   <div class="hero-grid">
     <div class="hero-text-col">
       <div class="hero-eyebrow">
@@ -1464,18 +1281,22 @@ nav {
       </div>
       <h1>
         Tu flotilla<br>
-        <span class="underline">institucional,</span><br>
-        <span class="gold">transparente.</span>
+        institucional,<br>
+        <span class="rotator">
+          <span>transparente.</span>
+          <span>trazable.</span>
+          <span>inteligente.</span>
+        </span>
       </h1>
       <p class="hero-text">
         SIGEPAV conecta la <strong>gestión de la flotilla con la rendición de cuentas</strong>. Del registro de una comisión al reporte ciudadano por QR: vehículos, combustible, mantenimiento y seguimiento en una sola aplicación web.
       </p>
       <div class="hero-actions">
         <a href="#contacto" class="btn btn-primary">
-          ▶ Solicitar demo
+          <i class="fa-solid fa-play"></i> Solicitar demo
         </a>
         <a href="#como-funciona" class="btn btn-outline">
-          ↓ ¿Cómo funciona?
+          <i class="fa-solid fa-arrow-down"></i> ¿Cómo funciona?
         </a>
       </div>
       <div class="hero-stats">
@@ -1494,10 +1315,8 @@ nav {
       </div>
     </div>
 
-    <!-- Vista ilustrativa; las cifras no representan resultados medidos -->
     <div class="hero-visual">
       <div class="mockup mockup-real">
-        <!-- Barra azul superior (estilo real con Módulos + logo + correo) -->
         <div class="real-navbar">
           <div class="real-modulos">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
@@ -1515,21 +1334,18 @@ nav {
             </div>
             <div class="real-user">
               <div class="real-user-avatar"></div>
-              <span>acontrerasr@…</span>
+              <span>ITSZN…</span>
               <span style="opacity:.7;">▾</span>
             </div>
           </div>
         </div>
 
-        <!-- Cuerpo blanco -->
         <div class="real-body">
-          <!-- Banner Menú principal -->
           <div class="real-banner">
             <div class="real-banner-title">Menú principal</div>
             <div class="real-banner-sub">Gestión vehicular institucional — TecNM Campus Zacatecas Norte</div>
           </div>
 
-          <!-- 4 KPIs -->
           <div class="real-kpis">
             <div class="real-kpi">
               <div class="real-kpi-icon">
@@ -1571,7 +1387,6 @@ nav {
         </div>
       </div>
 
-      <!-- Tarjetas flotantes decorativas -->
       <div class="floating-card floating-qr">
         <div class="qr-block"></div>
         <div class="qr-text">
@@ -1592,40 +1407,61 @@ nav {
   </div>
 </section>
 
-<p class="container" style="padding:18px 24px;color:#526176;font-size:13px">Vista ilustrativa del panel: las cifras de esta página son ejemplos, no resultados medidos de una institución.</p>
-<!-- ============== TRANSPARENCIA PROACTIVA ============== -->
+<!-- ============== MÉTRICAS ============== -->
+<section class="metrics">
+  <div class="metrics-grid">
+    <div class="metric reveal">
+      <div class="metric-num" data-count="8">0</div>
+      <div class="metric-lbl">Módulos integrados</div>
+    </div>
+    <div class="metric reveal d1">
+      <div class="metric-num" data-count="3">0</div>
+      <div class="metric-lbl">Perfiles de usuario</div>
+    </div>
+    <div class="metric reveal d2">
+      <div class="metric-num" data-count="100" data-suffix="%">0</div>
+      <div class="metric-lbl">Trazabilidad</div>
+    </div>
+    <div class="metric reveal d3">
+      <div class="metric-num" data-count="24" data-suffix="/7">0</div>
+      <div class="metric-lbl">Portal ciudadano</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TRANSPARENCIA ============== -->
 <section class="transparency" id="transparencia">
   <div class="container">
     <div class="section-tag">Innovación principal</div>
-    <h2 class="section-title">Transparencia <span class="accent">proactiva</span> de verdad.</h2>
-    <p class="section-lead">
+    <h2 class="section-title reveal">Transparencia <span class="accent">proactiva</span> de verdad.</h2>
+    <p class="section-lead reveal d1">
       Cada vehículo puede conectar a la institución con la ciudadanía. El QR abre un portal para <strong style="color: white;">consultar información pública, reportar incidentes y darles seguimiento</strong>, sin crear una cuenta.
     </p>
 
     <div class="transparency-grid">
       <div class="transp-steps">
-        <div class="transp-step">
+        <div class="transp-step reveal">
           <div class="step-number">1</div>
           <div class="step-content">
             <h4>Cada vehículo, un QR único</h4>
             <p>Al dar de alta un vehículo, SIGEPAV genera automáticamente un código QR único que se imprime y se coloca en la unidad.</p>
           </div>
         </div>
-        <div class="transp-step">
+        <div class="transp-step reveal d1">
           <div class="step-number">2</div>
           <div class="step-content">
             <h4>El ciudadano escanea</h4>
             <p>Cualquier persona con internet o datos móviles puede abrir el portal público de la unidad desde su teléfono, sin cuenta ni contraseña.</p>
           </div>
         </div>
-        <div class="transp-step">
+        <div class="transp-step reveal d2">
           <div class="step-number">3</div>
           <div class="step-content">
             <h4>Reportes con seguimiento</h4>
             <p>Puede consultar las comisiones publicadas y enviar un incidente con evidencia. Recibe un enlace para consultar el estado de su reporte.</p>
           </div>
         </div>
-        <div class="transp-step">
+        <div class="transp-step reveal d3">
           <div class="step-number">4</div>
           <div class="step-content">
             <h4>Atención institucional</h4>
@@ -1634,93 +1470,119 @@ nav {
         </div>
       </div>
 
-      <div class="qr-demo">
+      <div class="qr-demo reveal d2">
         <div class="qr-big">
           <div class="qr-pattern"></div>
         </div>
         <h3>Escanea, consulta, listo.</h3>
         <p>Cualquier ciudadano puede verificar el uso de un vehículo público en segundos. Esa es la diferencia.</p>
         <div class="qr-badge">
-          Consulta sin cuenta
+          <i class="fa-solid fa-lock-open"></i> Consulta sin cuenta
         </div>
       </div>
     </div>
   </div>
 </section>
 
-
-<section id="personas" class="features">
- <div class="container">
-  <div class="section-tag">Tres perfiles, un mismo sistema</div>
-  <h2 class="section-title">De la oficina al campo, <span class="accent">con seguimiento</span>.</h2>
-  <p class="section-lead">Cada comisión conecta la planeación, la captura operativa y la revisión administrativa. El portal ciudadano abre un canal adicional de participación.</p>
-  <div class="features-grid">
-   <article class="feature"><div class="feature-icon">01</div><h4>Administrador</h4><p>Asigna comisiones, administra unidades y vales, revisa solicitudes de finalización y consulta reportes.</p></article>
-   <article class="feature"><div class="feature-icon">02</div><h4>Comisionado</h4><p>Consulta su comisión desde el teléfono, registra kilometraje y combustible y envía el cierre para aprobación.</p></article>
-   <article class="feature"><div class="feature-icon">03</div><h4>Ciudadano</h4><p>Escanea el QR con internet o datos móviles, reporta un incidente con evidencia y consulta su seguimiento sin iniciar sesión.</p></article>
+<!-- ============== PERFILES ============== -->
+<section id="personas" class="features white">
+  <div class="container">
+    <div class="section-tag">Tres perfiles, un mismo sistema</div>
+    <h2 class="section-title reveal">De la oficina al campo, <span class="accent">con seguimiento</span>.</h2>
+    <p class="section-lead reveal d1">Cada comisión conecta la planeación, la captura operativa y la revisión administrativa. El portal ciudadano abre un canal adicional de participación.</p>
+    <div class="features-grid">
+      <article class="feature reveal">
+        <div class="feature-icon">01</div>
+        <h4>Administrador</h4>
+        <p>Asigna comisiones, administra unidades y vales, revisa solicitudes de finalización y consulta reportes.</p>
+      </article>
+      <article class="feature reveal d1">
+        <div class="feature-icon">02</div>
+        <h4>Comisionado</h4>
+        <p>Consulta su comisión desde el teléfono, registra kilometraje y combustible y envía el cierre para aprobación.</p>
+      </article>
+      <article class="feature reveal d2">
+        <div class="feature-icon">03</div>
+        <h4>Ciudadano</h4>
+        <p>Escanea el QR con internet o datos móviles, reporta un incidente con evidencia y consulta su seguimiento sin iniciar sesión.</p>
+      </article>
+    </div>
   </div>
- </div>
 </section>
+
+<!-- ============== EVOLUCIÓN ============== -->
 <section id="evolucion" class="features">
- <div class="container">
-  <div class="section-tag">SIGEPAV en la etapa regional</div>
-  <h2 class="section-title">Más información para <span class="accent">decidir y rendir cuentas</span>.</h2>
-  <div class="features-grid">
-   <article class="feature"><div class="feature-icon">$</div><h4>Costos por vehículo</h4><p>Consulta los importes registrados y compara el comportamiento de las unidades para apoyar la revisión del gasto.</p></article>
-   <article class="feature"><div class="feature-icon">!</div><h4>Vencimientos y salud de flota</h4><p>Identifica documentos por vencer, servicios programados y señales registradas que requieren atención.</p></article>
-   <article class="feature"><div class="feature-icon">↗</div><h4>Historial y respaldos</h4><p>Relaciona comisiones, documentos y registros por vehículo. Exporta reportes y genera respaldos de la base de datos.</p></article>
+  <div class="container">
+    <div class="section-tag">SIGEPAV en la etapa regional</div>
+    <h2 class="section-title reveal">Más información para <span class="accent">decidir y rendir cuentas</span>.</h2>
+    <div class="features-grid">
+      <article class="feature reveal">
+        <div class="feature-icon"><i class="fa-solid fa-dollar-sign"></i></div>
+        <h4>Costos por vehículo</h4>
+        <p>Consulta los importes registrados y compara el comportamiento de las unidades para apoyar la revisión del gasto.</p>
+      </article>
+      <article class="feature reveal d1">
+        <div class="feature-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <h4>Vencimientos y salud de flota</h4>
+        <p>Identifica documentos por vencer, servicios programados y señales registradas que requieren atención.</p>
+      </article>
+      <article class="feature reveal d2">
+        <div class="feature-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <h4>Historial y respaldos</h4>
+        <p>Relaciona comisiones, documentos y registros por vehículo. Exporta reportes y genera respaldos de la base de datos.</p>
+      </article>
+    </div>
+    <p class="section-lead reveal" style="margin-top:32px">La captura sin señal y la sincronización posterior son una mejora prevista. En la versión actual, el operativo necesita conexión al servidor para enviar el cierre.</p>
   </div>
-  <p class="section-lead" style="margin-top:32px">La captura sin señal y la sincronización posterior son una mejora prevista. En la versión actual, el operativo necesita conexión al servidor para enviar el cierre.</p>
- </div>
 </section>
 
-<!-- ============== CARACTERÍSTICAS / MÓDULOS ============== -->
-<section class="features" id="caracteristicas">
+<!-- ============== MÓDULOS ============== -->
+<section class="features white" id="caracteristicas">
   <div class="container">
     <div class="section-tag">Módulos del sistema</div>
-    <h2 class="section-title">Todo lo que necesitas, <span class="accent">integrado</span>.</h2>
-    <p class="section-lead">
+    <h2 class="section-title reveal">Todo lo que necesitas, <span class="accent">integrado</span>.</h2>
+    <p class="section-lead reveal d1">
       Ocho módulos pensados para que la gestión vehicular institucional sea simple, trazable y verificable. Sin Excel, sin papeleo, sin opacidad.
     </p>
 
     <div class="features-grid">
-      <div class="feature">
-        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg></div>
+      <div class="feature reveal">
+        <div class="feature-icon"><i class="fa-solid fa-car-side"></i></div>
         <h4>Registro vehicular</h4>
         <p>Alta de unidades con datos técnicos, placas, número de serie y QR único generado automáticamente.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 15.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zM5 7c-.83 0-1.5-.67-1.5-1.5S4.17 4 5 4s1.5.67 1.5 1.5S5.83 7 5 7zm14 5h-4c0 1.62-1.38 3-3 3s-3-1.38-3-3H6c-1.66 0-3 1.34-3 3v6h3v-2h12v2h3v-6c0-1.66-1.34-3-3-3zM12 13c.55 0 1-.45 1-1V7h2L11 3 7 7h2v5c0 .55.45 1 1 1h2z"/></svg></div>
+      <div class="feature reveal d1">
+        <div class="feature-icon"><i class="fa-solid fa-route"></i></div>
         <h4>Comisiones</h4>
         <p>Flujo completo: Pendiente → En curso → Solicitud de finalización → Finalizada o Cancelada.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.77 7.23l.01-.01-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33 0 1.38 1.12 2.5 2.5 2.5.36 0 .69-.08 1-.21v7.21c0 .55-.45 1-1 1s-1-.45-1-1V14c0-1.1-.9-2-2-2h-1V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v16h10v-7.5h1.5v5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V9c0-.69-.28-1.32-.73-1.77zM12 10H6V5h6v5zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg></div>
+      <div class="feature reveal d2">
+        <div class="feature-icon"><i class="fa-solid fa-gas-pump"></i></div>
         <h4>Vales de combustible</h4>
         <p>Administración digital de vales, control de kilometraje y consumo por vehículo.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg></div>
+      <div class="feature reveal d3">
+        <div class="feature-icon"><i class="fa-solid fa-folder-open"></i></div>
         <h4>Expediente digital</h4>
         <p>Pólizas, verificaciones, tarjetas de circulación y documentación legal centralizada.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div>
+      <div class="feature reveal">
+        <div class="feature-icon"><i class="fa-solid fa-wrench"></i></div>
         <h4>Mantenimiento</h4>
         <p>Servicios programados, observaciones por unidad e historial para dar seguimiento a las necesidades de mantenimiento.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg></div>
+      <div class="feature reveal d1">
+        <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
         <h4>Dashboard ejecutivo</h4>
         <p>Indicadores y gráficas a partir de los registros operativos, con reportes y exportaciones para revisión administrativa.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 14h-1c0-3.87-3.13-7-7-7h-1V5.73c1.16-.41 2-1.52 2-2.82C15 1.32 13.68 0 12 0S9 1.32 9 3c0 1.3.84 2.41 2 2.82V7h-1c-3.87 0-7 3.13-7 7H2c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h1v1h18v-1h1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1zm-13 4H7v-4h2v4zm4 0h-2v-4h2v4zm4 0h-2v-4h2v4z"/></svg></div>
+      <div class="feature reveal d2">
+        <div class="feature-icon"><i class="fa-solid fa-microchip"></i></div>
         <h4>Análisis inteligente</h4>
         <p>Selección de vehículos y priorización de mantenimiento con reglas sobre los datos registrados. Gemini puede complementar la redacción cuando está configurado.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></div>
+      <div class="feature reveal d3">
+        <div class="feature-icon"><i class="fa-solid fa-bell"></i></div>
         <h4>Alertas y notificaciones</h4>
         <p>Vencimientos de pólizas, mantenimientos próximos y solicitudes pendientes en tiempo real.</p>
       </div>
@@ -1732,40 +1594,40 @@ nav {
 <section class="how" id="como-funciona">
   <div class="container">
     <div class="section-tag">Proceso simplificado</div>
-    <h2 class="section-title">De la instalación a la <span class="accent">operación diaria</span>.</h2>
-    <p class="section-lead">
+    <h2 class="section-title reveal">De la instalación a la <span class="accent">operación diaria</span>.</h2>
+    <p class="section-lead reveal d1">
       La implementación se coordina con tu institución: infraestructura, carga inicial y capacitación antes de iniciar la operación.
     </p>
 
     <div class="how-flow">
-      <div class="how-step">
+      <div class="how-step reveal">
         <div class="num-circle">
           01
-          <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11l-2 2 2 2 2-2-2-2zm-4-4l-2 2 2 2 2-2-2-2zm-3 5l-2 2 2 2 2-2-2-2zm6.6 1.4l2.6-2.6L21 6.8 14.2 0l-4 4-1.4-1.4L7.4 4 6 2.6 4.6 4 6 5.4 4.6 6.8 6 8.2 4.6 9.6 6 11l1.4-1.4L8.8 11l1.4-1.4 4.4 4.4-1.4 1.4 7 6.8 1.4-1.4-7-6.8z"/></svg></span>
+          <span class="ico"><i class="fa-solid fa-sliders"></i></span>
         </div>
         <h4>Define la instalación</h4>
         <p>Revisa el tamaño de la flotilla, el alcance de la licencia y la infraestructura disponible con el área de sistemas.</p>
       </div>
-      <div class="how-step">
+      <div class="how-step reveal d1">
         <div class="num-circle">
           02
-          <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg></span>
+          <span class="ico"><i class="fa-solid fa-cloud-arrow-up"></i></span>
         </div>
         <h4>Configura</h4>
         <p>Carga tu inventario de vehículos y usuarios. Generamos los QR automáticamente.</p>
       </div>
-      <div class="how-step">
+      <div class="how-step reveal d2">
         <div class="num-circle">
           03
-          <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg></span>
+          <span class="ico"><i class="fa-solid fa-graduation-cap"></i></span>
         </div>
         <h4>Capacita</h4>
         <p>Prepara al administrador y al personal operativo para registrar comisiones, capturar datos y revisar solicitudes de cierre.</p>
       </div>
-      <div class="how-step">
+      <div class="how-step reveal d3">
         <div class="num-circle">
           04
-          <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9.19 6.35c-2.04 2.29-3.44 5.58-3.57 5.89L2 10.69l4.05-4.05c.47-.47 1.15-.68 1.81-.55l1.33.26zM11.17 17s3.74-1.55 5.89-3.7c5.4-5.4 4.5-9.62 4.21-10.57-.95-.3-5.17-1.19-10.57 4.21C8.55 9.09 7 12.83 7 12.83L11.17 17zm6.48-2.19c-2.29 2.04-5.58 3.44-5.89 3.57L13.31 22l4.05-4.05c.47-.47.68-1.15.55-1.81l-.26-1.33zM9 18c0 .83-.34 1.58-.88 2.12C6.94 21.3 2 22 2 22s.7-4.94 1.88-6.12C4.42 15.34 5.17 15 6 15c1.66 0 3 1.34 3 3zm6-9c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"/></svg></span>
+          <span class="ico"><i class="fa-solid fa-rocket"></i></span>
         </div>
         <h4>Opera</h4>
         <p>Opera desde el navegador y habilita el portal ciudadano mediante una dirección pública HTTPS estable.</p>
@@ -1776,27 +1638,35 @@ nav {
 
 <!-- ============== PRECIOS ============== -->
 <section class="pricing" id="precios">
- <div class="container">
-  <div class="section-tag">Implementación por institución</div>
-  <h2 class="section-title">Una propuesta para <span class="accent">tu flotilla</span>.</h2>
-  <p class="section-lead">El alcance se define según las unidades, la instalación y el acompañamiento requerido. Solicita una propuesta para tu plantel o institución.</p>
-  <div class="pricing-grid pricing-single"><div class="plan featured">
-   <div class="plan-badge">Licenciamiento por flota</div>
-   <div class="plan-name">SIGEPAV institucional</div>
-   <div class="plan-desc">Gestión operativa, reportes y participación ciudadana.</div>
-   <div class="plan-price" style="font-size:clamp(24px,4vw,36px)">Solicitar cotización</div>
-   <div class="plan-billing">Alcance y condiciones por confirmar en la propuesta</div>
-   <ul class="plan-list">
-    <li><span class="check">✓</span> Vehículos, comisiones y vales de combustible</li>
-    <li><span class="check">✓</span> Expedientes, mantenimiento y vencimientos</li>
-    <li><span class="check">✓</span> Costos, bitácora y exportación de reportes</li>
-    <li><span class="check">✓</span> Portal ciudadano por QR y seguimiento</li>
-    <li><span class="check">✓</span> Instalación coordinada con sistemas de la institución</li>
-   </ul><a href="#contacto" class="btn btn-gold">Consultar implementación</a>
-  </div></div>
- </div>
-</section>
+  <div class="container">
+    <div class="section-tag">Precio claro, sin sorpresas</div>
+    <h2 class="section-title reveal">Una propuesta para <span class="accent">tu flotilla</span>.</h2>
+    <p class="section-lead reveal d1">Un precio base para arrancar y un costo por unidad adicional. Solicita tu propuesta formal para tu plantel o institución.</p>
 
+    <div class="pricing-grid">
+      <div class="plan featured reveal d1">
+        <div class="plan-badge"><i class="fa-solid fa-star"></i> Licenciamiento por flota</div>
+        <div class="plan-name">SIGEPAV institucional</div>
+        <div class="plan-desc">Gestión operativa, reportes y participación ciudadana.</div>
+
+        <div class="price-row">
+          <div class="plan-price">$12,000<small>MXN</small></div>
+        </div>
+        <div class="plan-price-sub">10 vehículos incluidos</div>
+        <div class="plan-billing">+ $1,200 por vehículo adicional</div>
+
+        <ul class="plan-list">
+          <li><span class="check">✓</span> Vehículos, comisiones y vales de combustible</li>
+          <li><span class="check">✓</span> Expedientes, mantenimiento y vencimientos</li>
+          <li><span class="check">✓</span> Costos, bitácora y exportación de reportes</li>
+          <li><span class="check">✓</span> Portal ciudadano por QR y seguimiento</li>
+          <li><span class="check">✓</span> Instalación coordinada con sistemas de la institución</li>
+        </ul>
+        <a href="#contacto" class="btn btn-primary">Consultar implementación</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ============== CONTACTO ============== -->
 <section class="contact" id="contacto">
@@ -1804,28 +1674,28 @@ nav {
     <div class="contact-grid">
       <div class="contact-info">
         <div class="section-tag">Hablemos</div>
-        <h2 class="section-title">Solicita tu <span class="accent">demo gratis</span>.</h2>
-        <p class="section-lead">
+        <h2 class="section-title reveal">Solicita tu <span class="accent">demo gratis</span>.</h2>
+        <p class="section-lead reveal d1">
           Agenda una llamada de 30 minutos. Te mostramos la plataforma con datos de prueba y respondemos cualquier duda sobre implementación, precios y capacitación.
         </p>
 
-        <div class="contact-channels">
+        <div class="contact-channels reveal d2">
           <div class="channel">
-            <div class="channel-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+            <div class="channel-icon"><i class="fa-solid fa-envelope"></i></div>
             <div class="channel-info">
               <div class="label">Correo</div>
               <div class="value"><a href="mailto:sigepav@gmail.com">sigepav@gmail.com</a></div>
             </div>
           </div>
           <div class="channel">
-            <div class="channel-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+            <div class="channel-icon"><i class="fa-solid fa-phone"></i></div>
             <div class="channel-info">
               <div class="label">Teléfono</div>
               <div class="value"><a href="tel:+524931605986">+52 493 160 5986</a></div>
             </div>
           </div>
           <div class="channel">
-            <div class="channel-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg></div>
+            <div class="channel-icon"><i class="fa-solid fa-location-dot"></i></div>
             <div class="channel-info">
               <div class="label">Sede</div>
               <div class="value">TecNM Zacatecas Norte</div>
@@ -1834,8 +1704,8 @@ nav {
         </div>
       </div>
 
-      <form class="contact-form" id="contactForm">
-<p style="font-size:13px;color:var(--gris-texto);margin-bottom:20px">Al enviar, tus datos de contacto se remiten al equipo mediante Formspree para atender tu solicitud. No incluyas información sensible.</p>
+      <form class="contact-form reveal d1" id="contactForm">
+        <p style="font-size:13px;color:var(--slate);margin-bottom:20px">Al enviar, tus datos de contacto se remiten al equipo mediante Formspree para atender tu solicitud. No incluyas información sensible.</p>
         <div class="form-success" id="formSuccess">
           ✓
           <span>¡Solicitud enviada! Revisaremos tu mensaje para coordinar la demostración.</span>
@@ -1862,7 +1732,7 @@ nav {
         </div>
         <div class="form-row">
           <div class="form-group full">
-            <label>¿Cómo nos conociste? <span style="color:var(--gris-texto);font-weight:400;">(opcional)</span></label>
+            <label>¿Cómo nos conociste? <span style="color:var(--slate);font-weight:400;">(opcional)</span></label>
             <select name="referencia">
               <option value="">Selecciona una opción...</option>
               <option>Recomendación</option>
@@ -1880,7 +1750,7 @@ nav {
           </div>
         </div>
         <button type="submit" class="btn btn-primary form-submit">
-          ✈ Solicitar demo gratis
+          <i class="fa-solid fa-paper-plane"></i> Solicitar demo gratis
         </button>
       </form>
     </div>
@@ -1891,9 +1761,9 @@ nav {
 <section class="faq" id="faq">
   <div class="container">
     <div style="text-align: center;">
-      <div class="section-tag">Preguntas frecuentes</div>
-      <h2 class="section-title">¿Tienes <span class="accent">dudas</span>?</h2>
-      <p class="section-lead" style="margin-left: auto; margin-right: auto; text-align: center;">
+      <div class="section-tag" style="justify-content:center;">Preguntas frecuentes</div>
+      <h2 class="section-title reveal">¿Tienes <span class="accent">dudas</span>?</h2>
+      <p class="section-lead reveal d1" style="margin-left: auto; margin-right: auto; text-align: center;">
         Las respuestas más comunes sobre SIGEPAV. Si no encuentras lo que buscas, escríbenos y te respondemos personalmente.
       </p>
     </div>
@@ -1906,8 +1776,8 @@ nav {
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-SIGEPAV se instala en un servidor con la aplicación y su base de datos. Administradores y operativos acceden desde el navegador. Para entrar fuera del campus y usar los QR ciudadanos, sistemas debe habilitar una dirección pública HTTPS. La disponibilidad depende del servidor y su conectividad.
-</div>
+            SIGEPAV se instala en un servidor con la aplicación y su base de datos. Administradores y operativos acceden desde el navegador. Para entrar fuera del campus y usar los QR ciudadanos, sistemas debe habilitar una dirección pública HTTPS. La disponibilidad depende del servidor y su conectividad.
+          </div>
         </div>
       </div>
 
@@ -1918,8 +1788,8 @@ SIGEPAV se instala en un servidor con la aplicación y su base de datos. Adminis
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-La información existente debe revisarse antes de cargarla: formato, campos y calidad de los datos. La migración se acuerda durante la implementación; no se ofrece como una importación automática de cualquier archivo.
-</div>
+            La información existente debe revisarse antes de cargarla: formato, campos y calidad de los datos. La migración se acuerda durante la implementación; no se ofrece como una importación automática de cualquier archivo.
+          </div>
         </div>
       </div>
 
@@ -1930,8 +1800,8 @@ La información existente debe revisarse antes de cargarla: formato, campos y ca
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-El QR abre el portal ciudadano, no el expediente administrativo. Permite consultar la información pública disponible y reportar incidentes. La institución debe revisar el contenido publicado y las políticas de tratamiento de datos antes de operar con información real.
-</div>
+            El QR abre el portal ciudadano, no el expediente administrativo. Permite consultar la información pública disponible y reportar incidentes. La institución debe revisar el contenido publicado y las políticas de tratamiento de datos antes de operar con información real.
+          </div>
         </div>
       </div>
 
@@ -1942,8 +1812,8 @@ El QR abre el portal ciudadano, no el expediente administrativo. Permite consult
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-El <strong>administrador</strong> gestiona vehículos, usuarios, comisiones y solicitudes de cierre. El <strong>operativo</strong> captura información de sus comisiones desde el teléfono y solicita finalizarlas. El <strong>ciudadano</strong> consulta y reporta por QR, sin cuenta.
-</div>
+            El <strong>administrador</strong> gestiona vehículos, usuarios, comisiones y solicitudes de cierre. El <strong>operativo</strong> captura información de sus comisiones desde el teléfono y solicita finalizarlas. El <strong>ciudadano</strong> consulta y reporta por QR, sin cuenta.
+          </div>
         </div>
       </div>
 
@@ -1954,8 +1824,8 @@ El <strong>administrador</strong> gestiona vehículos, usuarios, comisiones y so
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-El calendario depende de la preparación del servidor, la base de datos, el acceso HTTPS y la carga inicial. Se acuerda una prueba piloto y una revisión del flujo completo antes de ampliar la operación.
-</div>
+            El calendario depende de la preparación del servidor, la base de datos, el acceso HTTPS y la carga inicial. Se acuerda una prueba piloto y una revisión del flujo completo antes de ampliar la operación.
+          </div>
         </div>
       </div>
 
@@ -1966,8 +1836,8 @@ El calendario depende de la preparación del servidor, la base de datos, el acce
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-Los módulos de reportes permiten exportar información a PDF y Excel, y el sistema cuenta con respaldos SQL. La conservación del expediente completo también requiere respaldar los documentos y evidencias almacenados en el servidor.
-</div>
+            Los módulos de reportes permiten exportar información a PDF y Excel, y el sistema cuenta con respaldos SQL. La conservación del expediente completo también requiere respaldar los documentos y evidencias almacenados en el servidor.
+          </div>
         </div>
       </div>
 
@@ -1978,8 +1848,8 @@ Los módulos de reportes permiten exportar información a PDF y Excel, y el sist
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-El motor local usa reglas y datos registrados para recomendar unidades y priorizar revisiones. Gemini es un complemento opcional de redacción. El análisis orienta al responsable y no sustituye una inspección mecánica ni garantiza la predicción de fallas.
-</div>
+            El motor local usa reglas y datos registrados para recomendar unidades y priorizar revisiones. Gemini es un complemento opcional de redacción. El análisis orienta al responsable y no sustituye una inspección mecánica ni garantiza la predicción de fallas.
+          </div>
         </div>
       </div>
     </div>
@@ -2003,7 +1873,7 @@ El motor local usa reglas y datos registrados para recomendar unidades y prioriz
       <ul>
         <li><a href="#caracteristicas">Características</a></li>
         <li><a href="#como-funciona">Cómo funciona</a></li>
-        <li><a href="#precios">Implementación</a></li>
+        <li><a href="#precios">Precios</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -2030,29 +1900,43 @@ El motor local usa reglas y datos registrados para recomendar unidades y prioriz
   </div>
 </footer>
 
+<!-- ============== CONTROLES DE REPRODUCCIÓN ============== -->
+<div class="playback-controls" id="pbControls">
+  <button class="pb-btn" id="pbToggle" title="Pausar / Reanudar (Espacio)" aria-label="Pausar o reanudar">
+    <i class="fa-solid fa-pause"></i>
+  </button>
+  <button class="pb-btn" id="pbFull" title="Pantalla completa (F)" aria-label="Pantalla completa">
+    <i class="fa-solid fa-expand"></i>
+  </button>
+</div>
+
+<!-- ============== ATTRACT OVERLAY ============== -->
+<div class="attract-overlay" id="attractOverlay" aria-hidden="true">
+  <img src="logo-sigepav-actualizado.png" alt="SIGEPAV" class="attract-logo" onerror="this.style.display='none'">
+  <h2>¿Ya conoces <span class="grad">SIGEPAV</span>?</h2>
+  <p>La plataforma que hace transparente el uso de la flotilla institucional.<br>Consulta pública por QR, gestión de comisiones y rendición de cuentas abierta.</p>
+  <div class="attract-tap">▸ Toca la pantalla para explorar</div>
+</div>
+
 <script>
-  // Navegación: sombra al hacer scroll
+  /* ==========================================================
+     1) COMPORTAMIENTO BASE (nav, móvil, FAQ, reveal, counters)
+     ========================================================== */
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 30) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
   });
 
-  // Menú móvil
-  document.getElementById('mobileToggle').addEventListener('click', () => {
+  const mobileToggle = document.getElementById('mobileToggle');
+  mobileToggle.addEventListener('click', () => {
     document.getElementById('navLinks').classList.toggle('open');
   });
-  // Cerrar menú móvil al hacer click en un link
   document.querySelectorAll('#navLinks a').forEach(link => {
     link.addEventListener('click', () => {
       document.getElementById('navLinks').classList.remove('open');
     });
   });
 
-  // FAQ acordeón
   document.querySelectorAll('.faq-question').forEach(q => {
     q.addEventListener('click', () => {
       const item = q.parentElement;
@@ -2062,18 +1946,205 @@ El motor local usa reglas y datos registrados para recomendar unidades y prioriz
     });
   });
 
-  // (Las animaciones de entrada se manejan vía CSS, sin scroll observer)
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => io.observe(el));
 
-  /* ────────────────────────────────────────────────────────────
-     FORMULARIO DE CONTACTO — Formspree (no necesita backend)
-     ──────────────────────────────────────────────────────────────
-     PARA ACTIVARLO:
-       1) Ve a https://formspree.io y créate cuenta con sigepav@gmail.com
-       2) Crea un nuevo form ("+ New form"), confírmalo desde el correo
-       3) Copia el endpoint que te dan (algo como https://formspree.io/f/abc123xyz)
-       4) Pégalo abajo reemplazando el FORMSPREE_ENDPOINT
-       5) Sube tu landing a GitHub Pages y ¡listo!
-     ──────────────────────────────────────────────────────────── */
+  const counters = document.querySelectorAll('[data-count]');
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const suffix = el.dataset.suffix || '';
+      let cur = 0;
+      const step = Math.max(1, Math.round(target / 45));
+      const tick = () => {
+        cur += step;
+        if (cur >= target) { cur = target; }
+        el.textContent = cur + suffix;
+        if (cur < target) requestAnimationFrame(tick);
+      };
+      tick();
+      cio.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+  counters.forEach(el => cio.observe(el));
+
+  /* ==========================================================
+     2) MODO PANTALLA PUBLICITARIA (auto-scroll + attract loop)
+     ========================================================== */
+  (function signage() {
+    /* ---- AJUSTES RÁPIDOS (segundos) ---- */
+    const TOUR_SECONDS           = 140;   // duración del recorrido completo
+    const END_PAUSE_MS           = 4500;  // pausa al final antes de volver arriba
+    const IDLE_MS                = 22000; // inactividad antes de mostrar attract
+    const INTERACTION_PAUSE_MS   = 12000; // pausa tras interacción del usuario
+    const SPLASH_MS              = 4000;  // duración del splash inicial
+    /* ------------------------------------ */
+
+    const body      = document.body;
+    const progress  = document.getElementById('progressBar');
+    const splash    = document.getElementById('splash');
+    const attract   = document.getElementById('attractOverlay');
+    const pbToggle  = document.getElementById('pbToggle');
+    const pbFull    = document.getElementById('pbFull');
+
+    /* ---- Splash inicial ---- */
+    function hideSplash() {
+      if (!splash || splash.classList.contains('hide')) return;
+      splash.classList.add('hide');
+    }
+    if (splash) splash.addEventListener('click', hideSplash);
+    setTimeout(hideSplash, SPLASH_MS);
+
+    /* ---- Auto-scroll cinemático ---- */
+    let scrolling = true;
+    let paused    = false;
+    let endBusy   = false;
+    let pos       = window.scrollY;
+    let lastT     = 0;
+    let resumeTimer = null;
+
+    const maxScroll = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    const sync = () => { pos = window.scrollY; };
+
+    function setProgress() {
+      if (!progress) return;
+      const m = maxScroll();
+      progress.style.width = (m > 0 ? (window.scrollY / m) * 100 : 0) + '%';
+    }
+
+    function loop(t) {
+      if (!lastT) lastT = t;
+      const dt = Math.min(64, t - lastT);
+      lastT = t;
+
+      if (scrolling && !paused && !endBusy) {
+        const m = maxScroll();
+        if (pos >= m - 1) {
+          // Llegamos al final: pausa y volvemos arriba
+          endBusy = true;
+          pos = m;
+          window.scrollTo(0, m);
+          setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+              pos = 0;
+              endBusy = false;
+              sync();
+            }, 1400);
+          }, END_PAUSE_MS);
+        } else {
+          pos += (m / TOUR_SECONDS) * (dt / 1000);
+          if (pos > m) pos = m;
+          window.scrollTo(0, pos);
+        }
+        setProgress();
+      }
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    function pauseTemporarily(ms) {
+      paused = true;
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => {
+        paused = false;
+        sync();
+      }, ms);
+    }
+
+    // Cualquier interacción pausa el recorrido unos segundos
+    ['wheel', 'touchmove', 'touchstart'].forEach(ev => {
+      window.addEventListener(ev, () => {
+        sync();
+        pauseTemporarily(INTERACTION_PAUSE_MS);
+      }, { passive: true });
+    });
+    window.addEventListener('scroll', () => {
+      if (paused) sync();
+      setProgress();
+    }, { passive: true });
+
+    /* ---- Botones de reproducción ---- */
+    if (pbToggle) {
+      pbToggle.addEventListener('click', () => {
+        scrolling = !scrolling;
+        lastT = 0;
+        pbToggle.innerHTML = scrolling
+          ? '<i class="fa-solid fa-pause"></i>'
+          : '<i class="fa-solid fa-play"></i>';
+        if (scrolling) sync();
+      });
+    }
+    if (pbFull) {
+      pbFull.addEventListener('click', () => {
+        const el = document.documentElement;
+        if (!document.fullscreenElement) {
+          (el.requestFullscreen || el.webkitRequestFullscreen || function(){}).call(el);
+        } else if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      });
+    }
+
+    /* ---- Atajos de teclado ---- */
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') { e.preventDefault(); pbToggle && pbToggle.click(); }
+      if (e.key === 'f' || e.key === 'F') { pbFull && pbFull.click(); }
+    });
+
+    /* ---- Attract mode (idle) ---- */
+    let idleTimer = null;
+    function resetIdle() {
+      body.classList.remove('idle');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => body.classList.add('idle'), IDLE_MS);
+    }
+    ['mousemove', 'mousedown', 'keydown', 'touchstart'].forEach(ev => {
+      document.addEventListener(ev, resetIdle, { passive: true });
+    });
+    resetIdle();
+
+    // Cerrar attract al tocar
+    if (attract) {
+      attract.addEventListener('click', () => {
+        body.classList.remove('idle');
+        paused = false;
+        sync();
+        resetIdle();
+      });
+    }
+
+    /* ---- Modo signage automático (tipografía grande) ---- */
+    function checkSignage() {
+      if (window.innerWidth >= 1400 && window.innerWidth > window.innerHeight) {
+        body.classList.add('signage');
+      } else {
+        body.classList.remove('signage');
+      }
+    }
+    checkSignage();
+    window.addEventListener('resize', () => {
+      checkSignage();
+      lastT = 0;
+      sync();
+      setProgress();
+    });
+    window.addEventListener('load', () => { setProgress(); });
+  })();
+
+  /* ==========================================================
+     3) FORMULARIO DE CONTACTO — Formspree + fallback mailto
+     ========================================================== */
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mgoqlllo';
   const CORREO_FALLBACK    = 'sigepav@gmail.com';
 
@@ -2092,8 +2163,6 @@ El motor local usa reglas y datos registrados para recomendar unidades y prioriz
     formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  /* Fallback: abrir cliente de correo del usuario con todos los datos
-     ya pre-llenados, por si Formspree aún no está configurado o falla. */
   function enviarPorMailto(datos) {
     const cuerpo = [
       `Nombre: ${datos.nombre}`,
@@ -2114,7 +2183,6 @@ El motor local usa reglas y datos registrados para recomendar unidades y prioriz
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Estado de carga
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span style="display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:8px"></span> Enviando...';
     formSuccess.classList.remove('show', 'error');
@@ -2130,8 +2198,6 @@ El motor local usa reglas y datos registrados para recomendar unidades y prioriz
     };
 
     try {
-      // Formspree espera el campo "email" para el "Reply-To"
-      // y acepta "_subject" para personalizar el asunto del correo
       const payload = new FormData();
       payload.append('Nombre',       datos.nombre);
       payload.append('Institución',  datos.institucion);
@@ -2158,7 +2224,6 @@ El motor local usa reglas y datos registrados para recomendar unidades y prioriz
         setTimeout(() => enviarPorMailto(datos), 1500);
       }
     } catch (err) {
-      // Error de red: hacemos fallback automático al mailto
       mostrarMensaje('error', 'No hay conexión. Te abrimos tu cliente de correo como respaldo.');
       setTimeout(() => enviarPorMailto(datos), 1500);
     } finally {
