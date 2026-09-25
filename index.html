@@ -176,7 +176,7 @@
   .btn i { font-size: 14px; }
 
   /* ===========================
-     TICKER (marquesina publicitaria)
+     TICKER
      =========================== */
   .ticker {
     background: var(--navy-950);
@@ -999,10 +999,9 @@
   .footer-bottom strong { color: white; }
 
   /* ============================================================
-     🎬 MODO PANTALLA PUBLICITARIA (ATTRACT LOOP)
+     🎬 MODO PANTALLA PUBLICITARIA
      ============================================================ */
 
-  /* Barra de progreso del recorrido automático */
   .progress-bar {
     position: fixed; top: 0; left: 0;
     height: 4px; width: 0;
@@ -1021,7 +1020,6 @@
     flex-direction: column; gap: 26px;
     color: white; text-align: center; padding: 40px;
     transition: opacity 0.9s ease, visibility 0.9s;
-    cursor: pointer;
   }
   .splash::before {
     content: ''; position: absolute; inset: 0;
@@ -1094,68 +1092,7 @@
   }
   .pb-btn:hover { background: var(--blue-600); transform: scale(1.1); }
 
-  /* Attract overlay (idle) */
-  .attract-overlay {
-    position: fixed; inset: 0; z-index: 4500;
-    background: radial-gradient(circle at 50% 50%, rgba(7,17,39,.94), rgba(4,9,26,.99));
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 30px;
-    text-align: center; padding: 40px;
-    opacity: 0; visibility: hidden; pointer-events: none;
-    transition: opacity .7s ease, visibility .7s ease;
-    cursor: pointer;
-  }
-  .attract-overlay::before {
-    content: ''; position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 10%, rgba(30,111,255,.35), transparent 55%),
-      radial-gradient(ellipse at 85% 90%, rgba(34,211,238,.3), transparent 55%);
-    pointer-events: none;
-  }
-  .attract-overlay > * { position: relative; z-index: 2; }
-  body.idle .attract-overlay { opacity: 1; visibility: visible; pointer-events: auto; }
-  body.idle { cursor: none; }
-  body.idle .playback-controls { opacity: 0; pointer-events: none; }
-  body.idle nav, body.idle .ticker { filter: brightness(.4); }
-
-  .attract-logo {
-    height: 110px; background: white; padding: 12px; border-radius: 22px;
-    box-shadow: 0 30px 70px rgba(0,0,0,.5), 0 0 0 10px rgba(34,211,238,.14);
-    animation: floatY 5s ease-in-out infinite;
-  }
-  .attract-overlay h2 {
-    font-family: var(--font-display);
-    font-size: clamp(44px, 7.5vw, 96px);
-    letter-spacing: -0.035em; line-height: 1;
-    color: white;
-  }
-  .attract-overlay h2 .grad {
-    background: linear-gradient(120deg, var(--cyan-300), var(--cyan-400));
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    font-style: italic;
-  }
-  .attract-overlay p {
-    color: rgba(255,255,255,.75);
-    font-size: clamp(16px, 1.6vw, 22px);
-    max-width: 720px;
-    line-height: 1.5;
-  }
-  .attract-tap {
-    padding: 18px 40px; border-radius: 100px;
-    background: var(--grad-accent); color: white;
-    font-weight: 800; letter-spacing: 0.2em;
-    text-transform: uppercase; font-size: 14px;
-    box-shadow: 0 0 0 0 rgba(30,111,255,.6);
-    animation: pulseBtn 2.2s infinite;
-  }
-  @keyframes pulseBtn {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(30,111,255,.6); }
-    50% { transform: scale(1.06); box-shadow: 0 0 0 22px rgba(30,111,255,0); }
-  }
-
-  /* Modo signage: tipografías más grandes para distancia */
+  /* Modo signage */
   body.signage .hero h1 { font-size: clamp(56px, 7vw, 104px); }
   body.signage .hero-text { font-size: 24px; max-width: 640px; }
   body.signage .section-title { font-size: clamp(40px, 4.4vw, 68px); }
@@ -1910,17 +1847,9 @@
   </button>
 </div>
 
-<!-- ============== ATTRACT OVERLAY ============== -->
-<div class="attract-overlay" id="attractOverlay" aria-hidden="true">
-  <img src="logo-sigepav-actualizado.png" alt="SIGEPAV" class="attract-logo" onerror="this.style.display='none'">
-  <h2>¿Ya conoces <span class="grad">SIGEPAV</span>?</h2>
-  <p>La plataforma que hace transparente el uso de la flotilla institucional.<br>Consulta pública por QR, gestión de comisiones y rendición de cuentas abierta.</p>
-  <div class="attract-tap">▸ Toca la pantalla para explorar</div>
-</div>
-
 <script>
   /* ==========================================================
-     1) COMPORTAMIENTO BASE (nav, móvil, FAQ, reveal, counters)
+     1) COMPORTAMIENTO BASE
      ========================================================== */
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -1979,21 +1908,19 @@
   counters.forEach(el => cio.observe(el));
 
   /* ==========================================================
-     2) MODO PANTALLA PUBLICITARIA (auto-scroll + attract loop)
+     2) MODO PANTALLA PUBLICITARIA (auto-scroll continuo)
      ========================================================== */
   (function signage() {
     /* ---- AJUSTES RÁPIDOS (segundos) ---- */
-    const TOUR_SECONDS           = 140;   // duración del recorrido completo
-    const END_PAUSE_MS           = 4500;  // pausa al final antes de volver arriba
-    const IDLE_MS                = 22000; // inactividad antes de mostrar attract
-    const INTERACTION_PAUSE_MS   = 12000; // pausa tras interacción del usuario
-    const SPLASH_MS              = 4000;  // duración del splash inicial
+    const TOUR_SECONDS         = 140;   // duración del recorrido completo
+    const END_PAUSE_MS         = 4500;  // pausa al final antes de volver arriba
+    const INTERACTION_PAUSE_MS = 12000; // pausa tras interacción del usuario
+    const SPLASH_MS            = 4000;  // duración del splash inicial
     /* ------------------------------------ */
 
     const body      = document.body;
     const progress  = document.getElementById('progressBar');
     const splash    = document.getElementById('splash');
-    const attract   = document.getElementById('attractOverlay');
     const pbToggle  = document.getElementById('pbToggle');
     const pbFull    = document.getElementById('pbFull');
 
@@ -2030,7 +1957,6 @@
       if (scrolling && !paused && !endBusy) {
         const m = maxScroll();
         if (pos >= m - 1) {
-          // Llegamos al final: pausa y volvemos arriba
           endBusy = true;
           pos = m;
           window.scrollTo(0, m);
@@ -2062,7 +1988,7 @@
       }, ms);
     }
 
-    // Cualquier interacción pausa el recorrido unos segundos
+    // Interacción del usuario: pausa temporal y luego continúa
     ['wheel', 'touchmove', 'touchstart'].forEach(ev => {
       window.addEventListener(ev, () => {
         sync();
@@ -2102,29 +2028,7 @@
       if (e.key === 'f' || e.key === 'F') { pbFull && pbFull.click(); }
     });
 
-    /* ---- Attract mode (idle) ---- */
-    let idleTimer = null;
-    function resetIdle() {
-      body.classList.remove('idle');
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(() => body.classList.add('idle'), IDLE_MS);
-    }
-    ['mousemove', 'mousedown', 'keydown', 'touchstart'].forEach(ev => {
-      document.addEventListener(ev, resetIdle, { passive: true });
-    });
-    resetIdle();
-
-    // Cerrar attract al tocar
-    if (attract) {
-      attract.addEventListener('click', () => {
-        body.classList.remove('idle');
-        paused = false;
-        sync();
-        resetIdle();
-      });
-    }
-
-    /* ---- Modo signage automático (tipografía grande) ---- */
+    /* ---- Modo signage automático ---- */
     function checkSignage() {
       if (window.innerWidth >= 1400 && window.innerWidth > window.innerHeight) {
         body.classList.add('signage');
